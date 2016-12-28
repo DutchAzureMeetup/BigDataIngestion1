@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "configuration": {
+      "type": "object"
+    },
+    "eventHubName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the Event Hub"
+      }
+    }
+  },
+  "variables": {
+  },
+  "resources": [
+    { 
+      "apiVersion": "2015-01-01",
+      "name": "EventHub",
+      "type": "Microsoft.Resources/deployments",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/pascalnaber/EnterpriseARMTemplates/master/ResourcesWithNamingConvention/Microsoft.Eventhub/azuredeploy.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "configuration": {
+            "value": "[parameters('configuration')]"
+          },
+          "eventHubName": {
+            "value": "[parameters('eventHubName')]"
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {
+  }
+}

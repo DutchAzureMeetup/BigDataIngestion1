@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "emitEntryPoint": true,
+    "debugType": "portable"
+  },
+  "dependencies": {
+    "Newtonsoft.Json": "9.0.1",
+    "AMQPNetLite": "1.2.2",
+    "Microsoft.NETCore.App": {
+      "type": "platform",
+      "version": "1.0.1"
+    },
+    "CommandLineParser": "2.1.1-beta"
+  },
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": "dnxcore50"
+    }
+  },
+  "publishOptions": {
+    "include": [
+      "docker-compose.yml",
+      "Dockerfile",
+      ".dockerignore"
+    ]
+  }
+}

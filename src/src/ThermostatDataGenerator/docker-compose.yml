@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  thermostatdatagenerator:
+    image: user/thermostatdatagenerator${TAG}
+    build:
+      context: .
+      dockerfile: Dockerfile
