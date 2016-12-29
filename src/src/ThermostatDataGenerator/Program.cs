@@ -3,11 +3,8 @@ using Amqp.Framing;
 using CommandLine;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CommandLine.Text;
 using System.Net;
 
 namespace ThermostatDataGenerator
@@ -16,7 +13,7 @@ namespace ThermostatDataGenerator
     {
         public static void Main(string[] args)
         {
-            var commandLineArguments = (Parsed<Options>)CommandLine.Parser.Default.ParseArguments<Options>(args);
+            var commandLineArguments = (Parsed<Options>)Parser.Default.ParseArguments<Options>(args);
 
             Task t = MainAsync(commandLineArguments.Value);
             t.Wait();
@@ -50,8 +47,10 @@ namespace ThermostatDataGenerator
                 };
                 string serializedJson = JsonConvert.SerializeObject(data);
 
-                Message message = new Message();
-                message.BodySection = new Data() { Binary = Encoding.UTF8.GetBytes(serializedJson) };
+                Message message = new Message
+                {
+                    BodySection = new Data {Binary = Encoding.UTF8.GetBytes(serializedJson)}
+                };
 
                 SenderLink sender = new SenderLink(session, "sender-link", options.EventHubName);
 

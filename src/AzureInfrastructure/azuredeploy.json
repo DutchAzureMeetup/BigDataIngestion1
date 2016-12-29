@@ -22,6 +22,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
+          //Dit must be a public url (in Linked template local file system is not supported) 
           "uri": "https://raw.githubusercontent.com/pascalnaber/EnterpriseARMTemplates/master/ResourcesWithNamingConvention/Microsoft.Eventhub/azuredeploy.json",
           "contentVersion": "1.0.0.0"
         },
