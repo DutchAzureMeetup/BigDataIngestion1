@@ -15,15 +15,15 @@
   "variables": {
   },
   "resources": [
-    { 
+    {
       "apiVersion": "2015-01-01",
       "name": "EventHub",
       "type": "Microsoft.Resources/deployments",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          //Dit must be a public url (in Linked template local file system is not supported) 
-          "uri": "https://raw.githubusercontent.com/pascalnaber/EnterpriseARMTemplates/master/ResourcesWithNamingConvention/Microsoft.Eventhub/azuredeploy.json",
+          //Dit must be a public url (in Linked template local file system is not supported)
+          "uri": "https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/develop/src/AzureInfrastructure/Microsoft.Eventhub/azuredeploy.json",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
