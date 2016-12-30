@@ -4,15 +4,15 @@
   "parameters": {
     "configuration": {
       "value": {
-        "projectName": "azuremeetup",
-        "owner": "pascalnaber",
+        "projectName": "dutchazuremeetup",
+        "owner": "dutchazuremeetup",
         "costCenter": "AB1234",
         "businessUnit": "meetup",
         "environment": "dev"
       }
     },
     "eventHubName": {
-      "value": "azuremeetuphub"
+      "value": "dambg"
     }
   }
 }

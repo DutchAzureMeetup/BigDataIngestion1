@@ -23,7 +23,7 @@
         "mode": "Incremental",
         "templateLink": {
           //Dit must be a public url (in Linked template local file system is not supported)
-          "uri": "https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/develop/src/AzureInfrastructure/Microsoft.Eventhub/azuredeploy.json",
+          "uri": "https://raw.githubusercontent.com/DutchAzureMeetup/BigDataIngestion1/develop/src/AzureInfrastructure/Microsoft.Eventhub/azuredeploy.json",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -32,6 +32,24 @@
           },
           "eventHubName": {
             "value": "[parameters('eventHubName')]"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "2015-01-01",
+      "name": "StorageAccount",
+      "type": "Microsoft.Resources/deployments",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          //Dit must be a public url (in Linked template local file system is not supported)
+          "uri": "https://raw.githubusercontent.com/DutchAzureMeetup/BigDataIngestion1/develop/src/AzureInfrastructure/Microsoft.Storage/azuredeploy.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "configuration": {
+            "value": "[parameters('configuration')]"
           }
         }
       }
