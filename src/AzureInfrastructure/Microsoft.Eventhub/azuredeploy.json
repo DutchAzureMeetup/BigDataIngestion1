@@ -163,6 +163,14 @@
     "EventHubListenOnlyPolicyPrimaryKey": {
       "type": "string",
       "value": "[listkeys(variables('listenAuthRuleResourceId'), variables('apiVersion')).primaryKey]"
+    },
+    "DefaultSASKeyName": {
+      "type": "string",
+      "value": "[variables('defaultSASKeyName')]"
+    },
+    "ConsumerGroupName": {
+      "type": "string",
+      "value": "[parameters('consumerGroupName')]"
     }
   }
 }

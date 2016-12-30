@@ -33,6 +33,8 @@
     </None>
     <Content Include="Deploy-AzureResourceGroup.ps1" />
     <None Include="Microsoft.Eventhub\azuredeploy.json" />
+    <None Include="Microsoft.Storage\azuredeploy.json" />
+    <None Include="Microsoft.StreamAnalytics\azuredeploy.json" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>
