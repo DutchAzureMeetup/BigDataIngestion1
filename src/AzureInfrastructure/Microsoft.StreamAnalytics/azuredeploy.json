@@ -63,7 +63,7 @@
                 "properties": {
                   "serviceBusNamespace": "[parameters('serviceBusNamespace')]",
                   "sharedAccessPolicyName": "[parameters('sharedAccessPolicyName')]",
-                  "sharedAccessPolicyKey": "[listkeys(resourceId('Microsoft.Eventhub/namespaces/authorizationRules', [parameters('serviceBusNamespace')], [parameters('sharedAccessPolicyName')], '2014-09-01').primaryKey]",
+                  "sharedAccessPolicyKey": "[listkeys(resourceId('Microsoft.Eventhub/namespaces/authorizationRules', parameters('serviceBusNamespace'), parameters('sharedAccessPolicyName')), '2014-09-01').primaryKey]",
                   "eventHubName": "[parameters('eventHubName')]",
                   "consumerGroupName": "[parameters('consumerGroupName')]"
                 }
