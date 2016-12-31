@@ -75,7 +75,7 @@
           "name": "encp4standeningestionquery",
           "properties": {
             "streamUnits": 3,
-            "query": "SELECT *\r\nINTO   [thermostatingestionbloboutput]\r\nFROM   [thermostatingestion]\r\nTIMESTAMP BY EventEnqueuedUtcTime\r\nPARTITION BY PartitionId;"
+            "query": "SELECT *\r\nINTO   [thermostatingestionbloboutput]\r\nFROM   [thermostatingestion]\r\nPARTITION BY PartitionId;"
           }
         },
         "outputs": [
