@@ -136,7 +136,7 @@
     }
   ],
   "outputs": {
-    "namespaceName": {
+    "NamespaceName": {
       "type": "string",
       "value": "[variables('namespaceName')]"
     },

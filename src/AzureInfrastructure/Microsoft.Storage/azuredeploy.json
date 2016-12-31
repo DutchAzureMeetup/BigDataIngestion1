@@ -43,15 +43,15 @@
     }
   ],
   "outputs": {
-    "storageAccountConnectionString": {
+    "StorageAccountConnectionString": {
       "type": "string",
       "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=',listKeys(variables('storageAccountName'), '2016-01-01').keys[0].value,variables('endPoints'))]"
     },
-    "storageAccountName": {
+    "StorageAccountName": {
       "type": "string",
       "value": "[variables('storageAccountName')]"
     },
-    "storageAccountKey": {
+    "StorageAccountKey": {
       "type": "string",
       "value": "[listKeys(variables('storageAccountName'), '2016-01-01').keys[0].value]"
     }

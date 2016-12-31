@@ -11,9 +11,6 @@
     "sharedAccessPolicyName": {
       "type": "string"
     },
-    "sharedAccessPolicyKey": {
-      "type": "string"
-    },
     "eventHubName": {
       "type": "string"
     },
@@ -49,7 +46,7 @@
         "EventsOutOfOrderPolicy": "Adjust",
         "inputs": [
           {
-            "name": "encp4standeningestion",
+            "name": "thermostatingestion",
             "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
             "location": "[resourceGroup().location]",
             "apiVersion": "2015-06-01",
@@ -66,7 +63,7 @@
                 "properties": {
                   "serviceBusNamespace": "[parameters('serviceBusNamespace')]",
                   "sharedAccessPolicyName": "[parameters('sharedAccessPolicyName')]",
-                  "sharedAccessPolicyKey": "[listkeys(resourceId('Microsoft.Eventhub/namespaces/authorizationRules', [parameters('serviceBusNamespace')], [parameters('sharedAccessPolicyKey')], '2014-09-01').primaryKey]",
+                  "sharedAccessPolicyKey": "[listkeys(resourceId('Microsoft.Eventhub/namespaces/authorizationRules', [parameters('serviceBusNamespace')], [parameters('sharedAccessPolicyName')], '2014-09-01').primaryKey]",
                   "eventHubName": "[parameters('eventHubName')]",
                   "consumerGroupName": "[parameters('consumerGroupName')]"
                 }
@@ -78,12 +75,12 @@
           "name": "encp4standeningestionquery",
           "properties": {
             "streamUnits": 1,
-            "query": "SELECT EAN        \r\n,      DT         \r\n,      TYPE       \r\n,      INS_DT     \r\n,      ID         \r\n,      MTR        \r\n,      RLE        \r\n,      ACT        \r\n,      LCE        \r\n,      P_TYPE     \r\n,      HERKOMST   \r\n,      SENT_TO_MVS\r\n,      STAND_P    \r\n,      STAND_OP   \r\n,      STAND_TOT  \r\n,      STAND_T_P  \r\n,      STAND_T_OP \r\n,      STAND_T_TOT\r\nINTO   [encp4standeningestionbloboutput]\r\nFROM   [encp4standeningestion] TIMESTAMP BY EventEnqueuedUtcTime\r\n                               PARTITION BY PartitionId\r\n;"
+            "query": "SELECT *        \r\nINTO   [thermostatingestionbloboutput]\r\nFROM   [thermostatingestion] TIMESTAMP BY EventEnqueuedUtcTime\r\n                               PARTITION BY PartitionId\r\n;"
           }
         },
         "outputs": [
           {
-            "name": "encp4standeningestionbloboutput",
+            "name": "thermostatingestionbloboutput",
             "properties": {
               "Serialization": {
                 "type": "CSV",
