@@ -77,7 +77,7 @@
           "name": "encp4standeningestionquery",
           "properties": {
             "streamingUnits": 3,
-            "query": "SELECT *\r\nINTO   [thermostatingestionbloboutput]\r\nFROM   [thermostatingestion]\r\nPARTITION BY PartitionId;"
+            "query": "SELECT *\r\nINTO   [thermostatingestionbloboutput]\r\nFROM   [thermostatingestion]\r\nPARTITION BY PartitionId\r\n\r\nSELECT CustomerId, COUNT(*) AS Count, AVG(ElectricityUsage)\r\nINTO   [thermostatservicebusoutput]\r\nFROM   [thermostatingestion] TIMESTAMP BY Date\r\nGROUP BY CustomerId, HoppingWindow(second, 10 , 5)\r\n"
           }
         },
         "outputs": [
