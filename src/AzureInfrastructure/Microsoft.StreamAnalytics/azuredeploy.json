@@ -22,7 +22,11 @@
     }
   },
   "variables": {
-    "streamAnalyticsName": "[concat(parameters('configuration').projectName,'-sa-',parameters('configuration').environment)]"
+    "streamAnalyticsName": "[concat(parameters('configuration').projectName,'-sa-',parameters('configuration').environment)]",
+    "eventhubInputName": "thermostatingestion",
+    "blobOutputName": "thermostatingestionbloboutput",
+    "servicebusOutputName": "thermostatservicebusoutput"
+
   },
   "resources": [
     {
@@ -77,7 +81,7 @@
           "name": "encp4standeningestionquery",
           "properties": {
             "streamingUnits": 3,
-            "query": "SELECT *\r\nINTO   [thermostatingestionbloboutput]\r\nFROM   [thermostatingestion]\r\nPARTITION BY PartitionId\r\n\r\nSELECT CustomerId, COUNT(*) AS Count, AVG(ElectricityUsage)\r\nINTO   [thermostatservicebusoutput]\r\nFROM   [thermostatingestion] TIMESTAMP BY Date\r\nGROUP BY CustomerId, HoppingWindow(second, 10 , 5)\r\n"
+            "query": "[concat('SELECT *\r\nINTO   ', variables('blobOutputName') ,'\r\nFROM   ', variables('eventhubInputName'), ' TIMESTAMP BY Date\r\nPARTITION BY PartitionId\r\n\r\nSELECT CustomerId, COUNT(*) AS Count, AVG(ElectricityUsage)\r\nINTO   ',variables('servicebusOutputName'), '\r\nFROM   ',variables('eventhubInputName'),' TIMESTAMP BY Date\r\nGROUP BY CustomerId, HoppingWindow(second, 10 , 5)\r\n')]"
           }
         },
         "outputs": [
