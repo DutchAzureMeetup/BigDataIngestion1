@@ -23,9 +23,9 @@
   },
   "variables": {
     "streamAnalyticsName": "[concat(parameters('configuration').projectName,'-sa-',parameters('configuration').environment)]",
-    "eventhubInputName": "thermostatingestion",
+    "eventhubInputName": "thermostatingestioninput",
     "blobOutputName": "thermostatingestionbloboutput",
-    "servicebusOutputName": "thermostatservicebusoutput"
+    "servicebusOutputName": "thermostatingestionservicebusoutput"
 
   },
   "resources": [
