@@ -26,9 +26,9 @@
   },
   "resources": [
     {
-      "apiVersion": "2015-06-01",
+      "apiVersion": "2016-03-01",
       "name": "[variables('streamAnalyticsName')]",
-      "type": "Microsoft.StreamAnalytics/streamingjobs",
+      "type": "Microsoft.StreamAnalytics/StreamingJobs",
       "location": "[resourceGroup().location]",
       "tags": {
         "projectName": "[parameters('configuration').projectName]",
@@ -41,9 +41,11 @@
         "sku": {
           "name": "Standard"
         },
-        "EventsLateArrivalMaxDelayInSeconds": 1728000,
-        "eventsOutOfOrderMaxDelayInSeconds": 1800,
-        "EventsOutOfOrderPolicy": "Adjust",
+        "outputErrorPolicy": "stop",
+        "eventsOutOfOrderPolicy": "adjust",
+        "eventsOutOfOrderMaxDelayInSeconds": 0,
+        "eventsLateArrivalMaxDelayInSeconds": 5,
+        "dataLocale": "en-US",
         "inputs": [
           {
             "name": "thermostatingestion",
@@ -74,7 +76,7 @@
         "transformation": {
           "name": "encp4standeningestionquery",
           "properties": {
-            "streamUnits": 3,
+            "streamingUnits": 3,
             "query": "SELECT *\r\nINTO   [thermostatingestionbloboutput]\r\nFROM   [thermostatingestion]\r\nPARTITION BY PartitionId;"
           }
         },
