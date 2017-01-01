@@ -111,7 +111,33 @@
                 }
               }
             }
+          },
+
+
+          {
+            "name": "[variables('servicebusOutputName')]",
+            "properties": {
+              "Serialization": {
+                "type": "Json",
+                "properties": {
+                  "encoding": "UTF8",
+                  "format": "LineSeparated"
+                }
+              },
+              "datasource": {
+                "type": "Microsoft.ServiceBus/Topic",
+                "properties": {
+                  "topicName": "web",
+                  "serviceBusNamespace": "dutchazuremeetup",
+                  "sharedAccessPolicyName": "SendKey",
+                  "sharedAccessPolicyKey": "WdBA1T0cHOH3WV5jLyk4T5tM5aSIiLkNgm5FkksvY6Q="                
+                }
+              }
+            }
           }
+
+
+
         ]
       }
     }
