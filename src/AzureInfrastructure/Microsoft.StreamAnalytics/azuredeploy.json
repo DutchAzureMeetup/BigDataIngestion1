@@ -52,7 +52,7 @@
         "dataLocale": "en-US",
         "inputs": [
           {
-            "name": "thermostatingestion",
+            "name": "[variables('eventhubInputName')]",
             "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
             "location": "[resourceGroup().location]",
             "apiVersion": "2015-06-01",
@@ -78,7 +78,7 @@
           }
         ],
         "transformation": {
-          "name": "encp4standeningestionquery",
+          "name": "thermostatingestionquery",
           "properties": {
             "streamingUnits": 3,
             "query": "[concat('SELECT *\r\nINTO   ', variables('blobOutputName') ,'\r\nFROM   ', variables('eventhubInputName'), ' TIMESTAMP BY Date\r\nPARTITION BY PartitionId\r\n\r\nSELECT CustomerId, COUNT(*) AS Count, AVG(ElectricityUsage)\r\nINTO   ',variables('servicebusOutputName'), '\r\nFROM   ',variables('eventhubInputName'),' TIMESTAMP BY Date\r\nGROUP BY CustomerId, HoppingWindow(second, 10 , 5)\r\n')]"
@@ -86,7 +86,7 @@
         },
         "outputs": [
           {
-            "name": "thermostatingestionbloboutput",
+            "name": "[variables('blobOutputName')]",
             "properties": {
               "Serialization": {
                 "type": "CSV",
