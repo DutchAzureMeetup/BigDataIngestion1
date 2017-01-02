@@ -45,6 +45,7 @@ namespace ThermostatDataGenerator
                     ElectricityUsage = rnd.Next(0, 500),
                     CustomerId = options.CustomerId
                 };
+
                 string serializedJson = JsonConvert.SerializeObject(data);
 
                 Message message = new Message

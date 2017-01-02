@@ -5,7 +5,7 @@
     "configuration": {
       "type": "object"
     },
-    "serviceBusNamespace": {
+    "eventHubNamespace": {
       "type": "string"
     },
     "sharedAccessPolicyName": {
@@ -19,16 +19,32 @@
     },
     "storageAccountName": {
       "type": "string"
+    },
+    "serviceBusNamespace": {
+      "type": "string"
+    },
+    "serviceBusTopicName": {
+      "type": "string"
+    },
+    "serviceBusSenderPolicyName": {
+      "type": "string"
+    },
+    "serviceBusSenderPolicyKey": {
+      "type": "string"
     }
   },
   "variables": {
-    "streamAnalyticsName": "[concat(parameters('configuration').projectName,'-sa-',parameters('configuration').environment)]"
+    "streamAnalyticsName": "[concat(parameters('configuration').projectName,'-sa-',parameters('configuration').environment)]",
+    "eventhubInputName": "thermostatingestioninput",
+    "blobOutputName": "thermostatingestionbloboutput",
+    "servicebusOutputName": "thermostatingestionservicebusoutput"
+
   },
   "resources": [
     {
-      "apiVersion": "2015-06-01",
+      "apiVersion": "2016-03-01",
       "name": "[variables('streamAnalyticsName')]",
-      "type": "Microsoft.StreamAnalytics/streamingjobs",
+      "type": "Microsoft.StreamAnalytics/StreamingJobs",
       "location": "[resourceGroup().location]",
       "tags": {
         "projectName": "[parameters('configuration').projectName]",
@@ -41,12 +57,14 @@
         "sku": {
           "name": "Standard"
         },
-        "EventsLateArrivalMaxDelayInSeconds": 1728000,
-        "eventsOutOfOrderMaxDelayInSeconds": 1800,
-        "EventsOutOfOrderPolicy": "Adjust",
+        "outputErrorPolicy": "stop",
+        "eventsOutOfOrderPolicy": "adjust",
+        "eventsOutOfOrderMaxDelayInSeconds": 0,
+        "eventsLateArrivalMaxDelayInSeconds": 5,
+        "dataLocale": "en-US",
         "inputs": [
           {
-            "name": "thermostatingestion",
+            "name": "[variables('eventhubInputName')]",
             "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
             "location": "[resourceGroup().location]",
             "apiVersion": "2015-06-01",
@@ -61,9 +79,9 @@
               "datasource": {
                 "type": "Microsoft.ServiceBus/EventHub",
                 "properties": {
-                  "serviceBusNamespace": "[parameters('serviceBusNamespace')]",
+                  "serviceBusNamespace": "[parameters('eventHubNamespace')]",
                   "sharedAccessPolicyName": "[parameters('sharedAccessPolicyName')]",
-                  "sharedAccessPolicyKey": "[listkeys(resourceId('Microsoft.Eventhub/namespaces/authorizationRules', parameters('serviceBusNamespace'), parameters('sharedAccessPolicyName')), '2014-09-01').primaryKey]",
+                  "sharedAccessPolicyKey": "[listkeys(resourceId('Microsoft.Eventhub/namespaces/authorizationRules', parameters('eventHubNamespace'), parameters('sharedAccessPolicyName')), '2014-09-01').primaryKey]",
                   "eventHubName": "[parameters('eventHubName')]",
                   "consumerGroupName": "[parameters('consumerGroupName')]"
                 }
@@ -72,15 +90,15 @@
           }
         ],
         "transformation": {
-          "name": "encp4standeningestionquery",
+          "name": "thermostatingestionquery",
           "properties": {
-            "streamUnits": 1,
-            "query": "SELECT *        \r\nINTO   [thermostatingestionbloboutput]\r\nFROM   [thermostatingestion] TIMESTAMP BY EventEnqueuedUtcTime\r\n                               PARTITION BY PartitionId\r\n;"
+            "streamingUnits": 3,
+            "query": "[concat('SELECT *\r\nINTO   ', variables('blobOutputName') ,'\r\nFROM   ', variables('eventhubInputName'), ' TIMESTAMP BY Date\r\nPARTITION BY PartitionId\r\n\r\nSELECT CustomerId, COUNT(*) AS Count, AVG(ElectricityUsage)\r\nINTO   ',variables('servicebusOutputName'), '\r\nFROM   ',variables('eventhubInputName'),' TIMESTAMP BY Date\r\nGROUP BY CustomerId, HoppingWindow(second, 10 , 5)\r\n')]"
           }
         },
         "outputs": [
           {
-            "name": "thermostatingestionbloboutput",
+            "name": "[variables('blobOutputName')]",
             "properties": {
               "Serialization": {
                 "type": "CSV",
@@ -102,6 +120,27 @@
                   "pathPattern": "thermostatdata/fdate={date}/{time}",
                   "dateFormat": "yyyy-MM-dd",
                   "timeFormat": "HH"
+                }
+              }
+            }
+          },
+          {
+            "name": "[variables('servicebusOutputName')]",
+            "properties": {
+              "Serialization": {
+                "type": "Json",
+                "properties": {
+                  "encoding": "UTF8",
+                  "format": "LineSeparated"
+                }
+              },
+              "datasource": {
+                "type": "Microsoft.ServiceBus/Topic",
+                "properties": {
+                  "topicName": "[parameters('serviceBusTopicName')]",
+                  "serviceBusNamespace": "[parameters('serviceBusNamespace')]",
+                  "sharedAccessPolicyName": "[parameters('serviceBusSenderPolicyName')]",
+                  "sharedAccessPolicyKey": "[parameters('serviceBusSenderPolicyKey')]"
                 }
               }
             }

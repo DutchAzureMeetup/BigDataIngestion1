@@ -52,7 +52,7 @@
     }
   },
   "variables": {
-    "namespaceName": "[concat(parameters('configuration').projectName,'-eventhub-',parameters('configuration').environment)]",
+    "namespaceName": "[concat(parameters('configuration').projectName,'-eh-',parameters('configuration').environment)]",
     "location": "[resourceGroup().location]",
     "apiVersion": "2015-08-01",
     "defaultSASKeyName": "RootManageSharedAccessKey",

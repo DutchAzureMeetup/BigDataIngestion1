@@ -3,14 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{306CE3DD-B7AC-490B-86E1-F052CA12EB4E}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5EB98C01-12BE-474B-AB38-680E9D34220C}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ThermostatDataGenerator", "src\ThermostatDataGenerator\ThermostatDataGenerator.xproj", "{FC55CD63-7164-4733-8694-B53C01B6EC19}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ThermostatDataGenerator", "ThermostatDataGenerator\ThermostatDataGenerator.xproj", "{FC55CD63-7164-4733-8694-B53C01B6EC19}"
 EndProject
 Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "AzureInfrastructure", "AzureInfrastructure\AzureInfrastructure.deployproj", "{9D47980C-83BD-4E9F-B4D3-864684968F45}"
 EndProject
@@ -31,8 +29,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{FC55CD63-7164-4733-8694-B53C01B6EC19} = {306CE3DD-B7AC-490B-86E1-F052CA12EB4E}
 	EndGlobalSection
 EndGlobal
