@@ -7,10 +7,7 @@
     }
   },
   "variables": {
-    "serviceBusNamespaceName":
-      "[concat(parameters('configuration').projectName,'-sb-',parameters('configuration').environment)]",
-    "topicListenerAuthRuleName": "[concat(variables('serviceBusTopic').name, 'Listener' )]",
-    "topicSenderAuthRuleName": "[concat(variables('serviceBusTopic').name, 'Listener' )]",
+    "serviceBusNamespaceName": "[concat(parameters('configuration').projectName,'-sb-',parameters('configuration').environment)]",
     "serviceBusTopic": {
       "name": "WebApp",
       "subscriptions": [
@@ -19,7 +16,9 @@
           "rules": ""
         }
       ]
-    }
+    },
+    "topicListenerAuthRuleName": "[concat(variables('serviceBusTopic').name, 'Listener' )]",
+    "topicSenderAuthRuleName": "[concat(variables('serviceBusTopic').name, 'Listener' )]"
   },
   "resources": [
     {
