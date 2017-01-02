@@ -12,8 +12,7 @@
       "name": "WebApp",
       "subscriptions": [
         {
-          "name": "WebAppSubscription",
-          "rules": ""
+          "name": "WebAppSubscription"
         }
       ]
     },
