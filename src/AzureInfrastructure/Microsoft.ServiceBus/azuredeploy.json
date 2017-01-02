@@ -120,18 +120,16 @@
       "type": "object",
       "value": {
         "Name": "[variables('serviceBusTopic').name]",
-        "ConnectionString":
-          "[concat('Endpoint=sb://',variables('serviceBusNamespaceName'),'.servicebus.windows.net/;SharedAccessKeyName=', concat(variables('serviceBusTopic').name, 'Sender'),';SharedAccessKey=',listkeys(resourceId('Microsoft.ServiceBus/namespaces/topics/authorizationRules', variables('serviceBusNamespaceName'),variables('serviceBusTopic').name, concat(variables('serviceBusTopic').name, 'Sender')), '2014-09-01').primaryKey,'EntityPath=',variables('serviceBusTopic').name)]",
+        "ConnectionString": "[concat('Endpoint=sb://',variables('serviceBusNamespaceName'),'.servicebus.windows.net/;SharedAccessKeyName=', concat(variables('serviceBusTopic').name, 'Sender'),';SharedAccessKey=',listkeys(resourceId('Microsoft.ServiceBus/namespaces/topics/authorizationRules', variables('serviceBusNamespaceName'),variables('serviceBusTopic').name, concat(variables('serviceBusTopic').name, 'Sender')), '2014-09-01').primaryKey,'EntityPath=',variables('serviceBusTopic').name)]",
         "TopicSenderKey": {
           "Name": "[variables('topicSenderAuthRuleName')]",
-          "Key":
-            "[listkeys(resourceId('Microsoft.ServiceBus/namespaces/topics/authorizationRules', variables('serviceBusNamespaceName'),variables('serviceBusTopic').name, concat(variables('serviceBusTopic').name, 'Sender')), '2014-09-01').primaryKey]"
+          "Key": "[listkeys(resourceId('Microsoft.ServiceBus/namespaces/topics/authorizationRules', variables('serviceBusNamespaceName'),variables('serviceBusTopic').name, concat(variables('serviceBusTopic').name, 'Sender')), '2014-09-01').primaryKey]"
         },
         "TopicListenerKey": {
           "Name": "[variables('topicListenerAuthRuleName')]",
-          "Key":
-            "[listkeys(resourceId('Microsoft.ServiceBus/namespaces/topics/authorizationRules', variables('serviceBusNamespaceName'),variables('serviceBusTopic').name, concat(variables('serviceBusTopic').name, 'Listener')), '2014-09-01').primaryKey]"
-        }
+          "Key": "[listkeys(resourceId('Microsoft.ServiceBus/namespaces/topics/authorizationRules', variables('serviceBusNamespaceName'),variables('serviceBusTopic').name, concat(variables('serviceBusTopic').name, 'Listener')), '2014-09-01').primaryKey]"
+        },
+        "Subscriptions": "[variables('serviceBusTopic').subscriptions]"
       }
     }
   }
