@@ -1,0 +1,128 @@
+﻿{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "configuration": {
+      "type": "object"
+    }
+  },
+  "variables": {
+    "serviceBusNamespaceName": "[concat(parameters('configuration').projectName,'-sb-',parameters('configuration').environment)]",
+    "serviceBusTopic": {
+      "name": "WebApp",
+      "subscriptions": [
+        {
+          "name": "WebAppSubscription",
+          "rules": ""
+        }
+      ]
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2015-08-01",
+      "name": "[variables('serviceBusNamespaceName')]",
+      "type": "Microsoft.ServiceBus/namespaces",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "projectName": "[parameters('configuration').projectName]",
+        "owner": "[parameters('configuration').owner]",
+        "costCenter": "[parameters('configuration').costCenter]",
+        "businessUnit": "[parameters('configuration').businessUnit]",
+        "environment": "[parameters('configuration').environment]"
+      },
+      "kind": "Messaging",
+      "sku": {
+        "name": "Standard",
+        "tier": "Standard"
+      },
+      "resources": [
+        {
+          "apiVersion": "2015-08-01",
+          "name": "[variables('serviceBusTopic').name]",
+          "type": "topics",
+          "dependsOn": [
+            "[concat('Microsoft.ServiceBus/namespaces/', variables('serviceBusNamespaceName'))]"
+          ],
+          "properties": {
+            "path": "[variables('serviceBusTopic').name]",
+            "defaultMessageTimeToLive": "14.00:00:00",
+            "enablePartitioning": true,
+            "maxSizeInMegabytes": 5120,
+            "requiresDuplicateDetection": false
+          },
+          "resources": [
+            {
+              "apiVersion": "2015-08-01",
+              "name": "[concat(variables('serviceBusTopic').name, 'Listener' )]",
+              "type": "authorizationRules",
+              "dependsOn": [
+                "[variables('serviceBusTopic').name]"
+              ],
+              "properties": {
+                "rights": [
+                  "Listen"
+                ]
+              }
+            },
+            {
+              "apiVersion": "2015-08-01",
+              "name": "[concat(variables('serviceBusTopic').name, 'Sender')]",
+              "type": "authorizationRules",
+              "dependsOn": [
+                "[variables('serviceBusTopic').name]"
+              ],
+              "properties": {
+                "rights": [
+                  "Send"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "apiVersion": "2015-08-01",
+      "name": "[concat(variables('serviceBusNamespaceName'),'/',variables('serviceBusTopic').name,'/',variables('serviceBusTopic').subscriptions[copyIndex()].name)]",
+      "type": "Microsoft.ServiceBus/namespaces/topics/subscriptions",
+      "location": "[resourceGroup().location]",
+      "copy": {
+        "name": "subscriptions-copy",
+        "count": "[length(variables('serviceBusTopic').subscriptions)]"
+      },
+      "dependsOn": [
+        "[concat('Microsoft.ServiceBus/namespaces/', variables('serviceBusNamespaceName'), '/topics/', variables('serviceBusTopic').name)]"
+      ],
+      "properties": {
+        "defaultMessageTimeToLive": "14.00:00:00",
+        "lockDuration": "00:00:30",
+        "maxDeliveryCount": 10,
+        "deadLetteringOnFilterEvaluationExceptions": true,
+        "deadLetteringOnMessageExpiration": true
+      }
+    }
+  ],
+  "outputs": {
+    "serviceBusNamespaceName": {
+      "type": "string",
+      "value": "[variables('serviceBusNamespaceName')]"
+    },
+    "serviceBusNamespaceConnectionString": {
+      "type": "string",
+      "value": "[concat('Endpoint=sb://',variables('serviceBusNamespaceName'),'.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=',listkeys(resourceId(resourceGroup().name,'Microsoft.ServiceBus/namespaces/authorizationRules', variables('serviceBusNamespaceName'),'RootManageSharedAccessKey'), '2014-09-01').primaryKey)]"
+    },
+    "TopicConnectionString": {
+      "type": "string",
+      "value": "[concat('Endpoint=sb://',variables('serviceBusNamespaceName'),'.servicebus.windows.net/;SharedAccessKeyName=', concat(variables('serviceBusTopic').name, 'Sender'),';SharedAccessKey=',listkeys(resourceId('Microsoft.ServiceBus/namespaces/topics/authorizationRules', variables('serviceBusNamespaceName'),variables('serviceBusTopic').name, concat(variables('serviceBusTopic').name, 'Sender')), '2014-09-01').primaryKey,'EntityPath=',variables('serviceBusTopic').name)]"
+    },
+    "TopicSenderKey": {
+      "type": "string",
+      "value": "[listkeys(resourceId('Microsoft.ServiceBus/namespaces/topics/authorizationRules', variables('serviceBusNamespaceName'),variables('serviceBusTopic').name, concat(variables('serviceBusTopic').name, 'Sender')), '2014-09-01').primaryKey]"
+    },
+    "TopicListenerKey": {
+      "type": "string",
+      "value": "[listkeys(resourceId('Microsoft.ServiceBus/namespaces/topics/authorizationRules', variables('serviceBusNamespaceName'),variables('serviceBusTopic').name, concat(variables('serviceBusTopic').name, 'Listener')), '2014-09-01').primaryKey]"
+    }
+  }
+}
