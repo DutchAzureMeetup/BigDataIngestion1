@@ -85,8 +85,7 @@
     },
     {
       "apiVersion": "2015-08-01",
-      "name":
-        "[concat(variables('serviceBusNamespaceName'),'/',variables('serviceBusTopic').name,'/',variables('serviceBusTopic').subscriptions[copyIndex()].name)]",
+      "name": "[concat(variables('serviceBusNamespaceName'),'/',variables('serviceBusTopic').name,'/',variables('serviceBusTopic').subscriptions[copyIndex()].name)]",
       "type": "Microsoft.ServiceBus/namespaces/topics/subscriptions",
       "location": "[resourceGroup().location]",
       "copy": {
@@ -112,8 +111,7 @@
     },
     "serviceBusNamespaceConnectionString": {
       "type": "string",
-      "value":
-        "[concat('Endpoint=sb://',variables('serviceBusNamespaceName'),'.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=',listkeys(resourceId(resourceGroup().name,'Microsoft.ServiceBus/namespaces/authorizationRules', variables('serviceBusNamespaceName'),'RootManageSharedAccessKey'), '2014-09-01').primaryKey)]"
+      "value": "[concat('Endpoint=sb://',variables('serviceBusNamespaceName'),'.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=',listkeys(resourceId(resourceGroup().name,'Microsoft.ServiceBus/namespaces/authorizationRules', variables('serviceBusNamespaceName'),'RootManageSharedAccessKey'), '2014-09-01').primaryKey)]"
     },
     "Topic": {
       "type": "object",

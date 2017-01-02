@@ -5,7 +5,7 @@
     "configuration": {
       "type": "object"
     },
-    "serviceBusNamespace": {
+    "eventHubNamespace": {
       "type": "string"
     },
     "sharedAccessPolicyName": {
@@ -18,6 +18,18 @@
       "type": "string"
     },
     "storageAccountName": {
+      "type": "string"
+    },
+    "serviceBusNamespace": {
+      "type": "string"
+    },
+    "serviceBusTopicName": {
+      "type": "string"
+    },
+    "serviceBusSenderPolicyName": {
+      "type": "string"
+    },
+    "serviceBusSenderPolicyKey": {
       "type": "string"
     }
   },
@@ -67,9 +79,9 @@
               "datasource": {
                 "type": "Microsoft.ServiceBus/EventHub",
                 "properties": {
-                  "serviceBusNamespace": "[parameters('serviceBusNamespace')]",
+                  "serviceBusNamespace": "[parameters('eventHubNamespace')]",
                   "sharedAccessPolicyName": "[parameters('sharedAccessPolicyName')]",
-                  "sharedAccessPolicyKey": "[listkeys(resourceId('Microsoft.Eventhub/namespaces/authorizationRules', parameters('serviceBusNamespace'), parameters('sharedAccessPolicyName')), '2014-09-01').primaryKey]",
+                  "sharedAccessPolicyKey": "[listkeys(resourceId('Microsoft.Eventhub/namespaces/authorizationRules', parameters('eventHubNamespace'), parameters('sharedAccessPolicyName')), '2014-09-01').primaryKey]",
                   "eventHubName": "[parameters('eventHubName')]",
                   "consumerGroupName": "[parameters('consumerGroupName')]"
                 }
@@ -112,8 +124,6 @@
               }
             }
           },
-
-
           {
             "name": "[variables('servicebusOutputName')]",
             "properties": {
@@ -127,17 +137,14 @@
               "datasource": {
                 "type": "Microsoft.ServiceBus/Topic",
                 "properties": {
-                  "topicName": "web",
-                  "serviceBusNamespace": "dutchazuremeetup",
-                  "sharedAccessPolicyName": "SendKey",
-                  "sharedAccessPolicyKey": "WdBA1T0cHOH3WV5jLyk4T5tM5aSIiLkNgm5FkksvY6Q="                
+                  "topicName": "[parameters('serviceBusTopicName')]",
+                  "serviceBusNamespace": "[parameters('serviceBusNamespace')]",
+                  "sharedAccessPolicyName": "[parameters('serviceBusSenderPolicyName')]",
+                  "sharedAccessPolicyKey": "[parameters('serviceBusSenderPolicyKey')]"
                 }
               }
             }
           }
-
-
-
         ]
       }
     }
