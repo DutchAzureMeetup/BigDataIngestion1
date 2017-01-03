@@ -124,7 +124,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "https://raw.githubusercontent.com/DutchAzureMeetup/BigDataIngestion1/feature/marco/src/AzureInfrastructure/Microsoft.Web/azuredeploy-plan.json",
+          "uri": "https://raw.githubusercontent.com/DutchAzureMeetup/BigDataIngestion1/master/src/AzureInfrastructure/Microsoft.Web/azuredeploy-plan.json",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -142,7 +142,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "https://raw.githubusercontent.com/DutchAzureMeetup/BigDataIngestion1/feature/marco/src/AzureInfrastructure/Microsoft.Web/azuredeploy-webapp.json",
+          "uri": "https://raw.githubusercontent.com/DutchAzureMeetup/BigDataIngestion1/master/src/AzureInfrastructure/Microsoft.Web/azuredeploy-webapp.json",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
