@@ -40,7 +40,8 @@
         "name": "[variables('webAppName')]",
         "serverFarmId": "[resourceId(resourceGroup().name, 'Microsoft.Web/serverfarms', variables('serverFarmName'))]",
         "siteConfig": {
-          "AlwaysOn": true
+          "AlwaysOn": true,
+          "phpVersion": "Off"
         }
       },
       "resources": [
