@@ -119,7 +119,7 @@
     },
     { // App Plan
       "apiVersion": "2015-01-01",
-      "name": "AppPlan-ProductInnovatie",
+      "name": "AppPlan",
       "type": "Microsoft.Resources/deployments",
       "properties": {
         "mode": "Incremental",
@@ -130,6 +130,36 @@
         "parameters": {
           "configuration": {
             "value": "[parameters('configuration')]"
+          }
+        }
+      }
+    },
+    {
+      //Web App
+      "apiVersion": "2015-01-01",
+      "name": "WebApp",
+      "type": "Microsoft.Resources/deployments",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/DutchAzureMeetup/BigDataIngestion1/feature/marco/src/AzureInfrastructure/Microsoft.Web/azuredeploy-webapp.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "configuration": {
+            "value": "[parameters('configuration')]"
+          },
+          "serverFarmName": {
+            "value": "[reference('AppPlan').outputs.ServerFarmName.value]"
+          },
+          "sbConnectionString": {
+            "value": "[reference('ServiceBus').outputs.Topic.value.ConnectionString]"
+          },
+          "topicName": {
+            "value": "[reference('ServiceBus').outputs.Topic.value.Name]"
+          },
+          "subscriptionName": {
+            "value": "[reference('ServiceBus').outputs.Topic.value.Subscriptions[0].name]"
           }
         }
       }

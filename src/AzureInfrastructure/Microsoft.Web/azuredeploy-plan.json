@@ -33,7 +33,7 @@
     }
   ],
   "outputs": {
-    "serverFarmName": {
+    "ServerFarmName": {
       "type": "string",
       "value": "[variables('hostingPlanName')]"
     }
