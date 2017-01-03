@@ -153,7 +153,7 @@
             "value": "[reference('AppPlan').outputs.ServerFarmName.value]"
           },
           "sbConnectionString": {
-            "value": "[reference('ServiceBus').outputs.Topic.value.ConnectionString]"
+            "value": "[reference('ServiceBus').outputs.Topic.value.ListenConnectionString]"
           },
           "topicName": {
             "value": "[reference('ServiceBus').outputs.Topic.value.Name]"
