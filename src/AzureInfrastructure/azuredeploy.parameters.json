@@ -4,6 +4,7 @@
   "parameters": {
     "configuration": {
       "value": {
+        //Change the value of projectName to something else
         "projectName": "dutchazuremeetup",
         "owner": "dutchazuremeetup",
         "costCenter": "AB1234",
