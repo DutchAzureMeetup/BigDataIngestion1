@@ -36,6 +36,8 @@
     <None Include="Microsoft.ServiceBus\azuredeploy.json" />
     <None Include="Microsoft.Storage\azuredeploy.json" />
     <None Include="Microsoft.StreamAnalytics\azuredeploy.json" />
+    <None Include="Microsoft.Web\azuredeploy-webapp.json" />
+    <None Include="Microsoft.Web\azuredeploy-plan.json" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>
