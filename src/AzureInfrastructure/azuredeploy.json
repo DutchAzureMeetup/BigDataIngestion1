@@ -10,6 +10,26 @@
       "metadata": {
         "description": "Name of the Event Hub"
       }
+    },
+    "webDeployPackageFolder": {
+      "type": "string",
+      "minLength": 1,
+      "metadata": {
+        "description": "WebDeploy package location. This path is relative to the _artifactsLocation parameter"
+      }
+    },
+    "webDeployPackageFileName": {
+      "type": "string",
+      "minLength": 1,
+      "metadata": {
+        "description": "Name of the webdeploy package"
+      }
+    },
+    "_artifactsLocation": {
+      "type": "string"
+    },
+    "_artifactsLocationSasToken": {
+      "type": "securestring"
     }
   },
   "variables": {
@@ -160,6 +180,18 @@
           },
           "subscriptionName": {
             "value": "[reference('ServiceBus').outputs.Topic.value.Subscriptions[0].name]"
+          },
+          "webDeployPackageFolder": {
+            "value": "[parameters('webDeployPackageFolder')]"
+          },
+          "webDeployPackageFileName": {
+            "value": "[parameters('webDeployPackageFileName')]"
+          },
+          "_artifactsLocation": {
+            "value": "[parameters('_artifactsLocation')]"
+          },
+          "_artifactsLocationSasToken": {
+            "value": "[parameters('_artifactsLocationSasToken')]"
           }
         }
       }
