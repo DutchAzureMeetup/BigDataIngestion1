@@ -7,4 +7,5 @@
     -ResourceGroupName "DAMBigData" `
     -TemplateFile "azuredeploy.json" `
     -TemplateParametersFile "azuredeploy.parameters.json" `
-    -UploadArtifacts
+    -UploadArtifacts `
+	-ArtifactStagingDirectory "bin\debug\staging\AzureInfrastructure"

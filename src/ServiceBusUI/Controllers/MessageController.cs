@@ -1,15 +1,18 @@
 ﻿using System.Web.Http;
 using Microsoft.AspNet.SignalR;
+using ServiceBusUI.Models;
 
 namespace ServiceBusUI.Controllers
 {
     public class MessageController : ApiController
     {
-        public void Post([FromBody]string value)
+        public IHttpActionResult Post([FromBody]Message message)
         {
             var context = GlobalHost.ConnectionManager.GetHubContext<MessageHub>();
 
-            context.Clients.All.newMessage("hello world");
+            context.Clients.All.newMessage(message.Body);
+
+            return Ok();
         }
     }
 }
