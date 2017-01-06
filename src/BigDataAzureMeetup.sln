@@ -15,6 +15,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBusUI", "ServiceBusUI\ServiceBusUI.csproj", "{12ED46BB-246E-419A-A411-6B82BA0787B4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBusUI.WebJob", "ServiceBusUI.WebJob\ServiceBusUI.WebJob.csproj", "{F8065DA5-FA30-4D1C-BBF7-7B700ACB4D1E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{12ED46BB-246E-419A-A411-6B82BA0787B4} = {12ED46BB-246E-419A-A411-6B82BA0787B4}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
