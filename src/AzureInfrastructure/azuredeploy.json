@@ -209,51 +209,6 @@
           }
         }
       }
-    },
-    {
-      //Web Job
-      "apiVersion": "2015-01-01",
-      "name": "WebJob",
-      "type": "Microsoft.Resources/deployments",
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "https://raw.githubusercontent.com/DutchAzureMeetup/BigDataIngestion1/feature/servicebusui/src/AzureInfrastructure/Microsoft.Web/azuredeploy-webjob.json",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "configuration": {
-            "value": "[parameters('configuration')]"
-          },
-          "serverFarmName": {
-            "value": "[reference('AppPlan').outputs.ServerFarmName.value]"
-          },
-          "storageAccountConnectionString": {
-            "value": "[reference('StorageAccount').outputs.StorageAccountConnectionString.value]"
-          },
-          "sbConnectionString": {
-            "value": "[reference('ServiceBus').outputs.Topic.value.ListenConnectionString]"
-          },
-          "topicName": {
-            "value": "[reference('ServiceBus').outputs.Topic.value.Name]"
-          },
-          "subscriptionName": {
-            "value": "[reference('ServiceBus').outputs.Topic.value.Subscriptions[0].name]"
-          },
-          "webDeployPackageFolder": {
-            "value": "[parameters('webJobDeployPackageFolder')]"
-          },
-          "webDeployPackageFileName": {
-            "value": "[parameters('webJobDeployPackageFileName')]"
-          },
-          "_artifactsLocation": {
-            "value": "[parameters('_artifactsLocation')]"
-          },
-          "_artifactsLocationSasToken": {
-            "value": "[parameters('_artifactsLocationSasToken')]"
-          }
-        }
-      }
     }
   ],
   "outputs": {
