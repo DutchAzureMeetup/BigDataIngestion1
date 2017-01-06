@@ -9,7 +9,8 @@
   "variables": {
     "serviceBusNamespaceName": "[concat(parameters('configuration').projectName,'-sb-',parameters('configuration').environment)]",
     "serviceBusTopic": {
-      "name": "WebApp",
+      //Lowercase
+      "name": "webapp",
       "subscriptions": [
         {
           "name": "WebAppSubscription"
