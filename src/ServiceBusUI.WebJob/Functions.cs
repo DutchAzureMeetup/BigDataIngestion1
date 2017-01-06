@@ -13,11 +13,14 @@ namespace ServiceBusUI.WebJob
 {
     public class Functions
     {
-        private static readonly HttpClient Client = new HttpClient();
+        private static readonly HttpClient Client = new HttpClient
+        {
+            BaseAddress = new Uri("http://" + Environment.GetEnvironmentVariable("WEBSITE_HOSTNAME"))
+        };
 
         // This function will get triggered/executed when a new message is written 
         // on an Azure Queue called queue.
-        public static void ProcessQueueMessage([ServiceBusTrigger("%topicName%", "%subscriptionName%")] string message, TextWriter log)
+        public static void ProcessQueueMessage([ServiceBusTrigger("%topic%", "%subscription%")] string message, TextWriter log)
         {
             var content = new StringContent(
                 JsonConvert.SerializeObject(new { Body = message }),

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.Azure.WebJobs;
+using Newtonsoft.Json;
 
 namespace ServiceBusUI.WebJob
 {
@@ -14,21 +17,26 @@ namespace ServiceBusUI.WebJob
         // AzureWebJobsDashboard and AzureWebJobsStorage
         static void Main()
         {
-            var config = new JobHostConfiguration("DefaultEndpointsProtocol=https;AccountName=dutchazuremeetupmlnkdev;AccountKey=f56kNpXufdHeSg9lLlkep1hNPOwCAF8xJoc/p8etttDRYS7pTsHrwxQiMtKvkAUs10O1G4h0g3HdWBbhuffW8w==")
+            HttpClient Client = new HttpClient
+            {
+                BaseAddress = new Uri("http://" + Environment.GetEnvironmentVariable("WEBSITE_HOSTNAME"))
+            };
+
+            var content = new StringContent(
+                JsonConvert.SerializeObject(new { Body = "Hello, world!" }),
+                Encoding.UTF8,
+                "application/json");
+
+            Client.PostAsync("/api/Message", content).GetAwaiter().GetResult();
+
+
+            var config = new JobHostConfiguration()
             {
                 // Use a custom NameResolver to get topic/subscription names from config.
                 NameResolver = new ConfigurationNameResolver()
             };
 
-            config.UseServiceBus(new Microsoft.Azure.WebJobs.ServiceBus.ServiceBusConfiguration()
-            {
-                ConnectionString = "Endpoint=sb://dutchazuremeetupmlnk-sb-dev.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=GdQSx2qjUcj4SlDMz+cwMlaVZtxMTZG3xfu3lHtZbLA="
-            });
-
-            //if (config.IsDevelopment)
-            //{
-            //    config.UseDevelopmentSettings();
-            //}
+            config.UseServiceBus();
 
             var host = new JobHost(config);
             // The following code ensures that the WebJob will be running continuously
