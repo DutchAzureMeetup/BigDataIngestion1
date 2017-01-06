@@ -240,6 +240,9 @@
           "subscriptionName": {
             "value": "[reference('ServiceBus').outputs.Topic.value.Subscriptions[0].name]"
           },
+          "storageAccountConnectionString": {
+            "value": "[reference('StorageAccount').outputs.StorageAccountConnectionString.value]"
+          },
           "webDeployPackageFolder": {
             "value": "[parameters('webJobDeployPackageFolder')]"
           },
