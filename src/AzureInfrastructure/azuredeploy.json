@@ -228,6 +228,9 @@
           "serverFarmName": {
             "value": "[reference('AppPlan').outputs.ServerFarmName.value]"
           },
+          "storageAccountConnectionString": {
+            "value": "[reference('StorageAccount').outputs.StorageAccountConnectionString.value]"
+          },
           "sbConnectionString": {
             "value": "[reference('ServiceBus').outputs.Topic.value.ListenConnectionString]"
           },

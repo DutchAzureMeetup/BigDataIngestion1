@@ -17,6 +17,9 @@
     "subscriptionName": {
       "type": "string"
     },
+    "storageAccountConnectionString": {
+      "type": "string"
+    },
     "webDeployPackageFolder": {
       "type": "string",
       "minLength": 1,
@@ -84,6 +87,8 @@
             "WEBSITE_TIME_ZONE": "W. Europe Standard Time", //Set the site timezone to Amsterdam
 
             "sbconnstring": "[parameters('sbConnectionString')]",
+
+            "AzureWebJobsDashboard": "[parameters('storageAccountConnectionString')]",
 
             "topic": "[parameters('topicName')]",
             "subscription": "[parameters('subscriptionName')]"
