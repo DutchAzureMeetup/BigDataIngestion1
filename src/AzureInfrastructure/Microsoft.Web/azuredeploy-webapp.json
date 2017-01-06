@@ -8,7 +8,7 @@
     "serverFarmName": {
       "type": "string"
     },
-    "sbManageConnectionString": {
+    "sbTopicManageConnectionString": {
       "type": "string"
     },
     "topicName": {
@@ -64,7 +64,7 @@
           "properties": {
             "WEBSITE_TIME_ZONE": "W. Europe Standard Time", //Set the site timezone to Amsterdam
 
-            "sbManageConnectionString": "[parameters('sbManageConnectionString')]",
+            "AzureWebJobsServiceBus": "[parameters('sbTopicManageConnectionString')]",
 
             "topic": "[parameters('topicName')]",
             "subscription": "[parameters('subscriptionName')]"
