@@ -6,7 +6,7 @@ namespace ServiceBusUI.Controllers
 {
     public class MessageController : ApiController
     {
-        public IHttpActionResult Post([FromBody]Message message)
+        public IHttpActionResult Post(Message message)
         {
             var context = GlobalHost.ConnectionManager.GetHubContext<MessageHub>();
 

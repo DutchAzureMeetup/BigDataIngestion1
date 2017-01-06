@@ -14,14 +14,23 @@ namespace ServiceBusUI.WebJob
         // AzureWebJobsDashboard and AzureWebJobsStorage
         static void Main()
         {
-            var config = new JobHostConfiguration();
-
-            if (config.IsDevelopment)
+            var config = new JobHostConfiguration("DefaultEndpointsProtocol=https;AccountName=dutchazuremeetupmlnkdev;AccountKey=f56kNpXufdHeSg9lLlkep1hNPOwCAF8xJoc/p8etttDRYS7pTsHrwxQiMtKvkAUs10O1G4h0g3HdWBbhuffW8w==")
             {
-                config.UseDevelopmentSettings();
-            }
+                // Use a custom NameResolver to get topic/subscription names from config.
+                NameResolver = new ConfigurationNameResolver()
+            };
 
-            var host = new JobHost();
+            config.UseServiceBus(new Microsoft.Azure.WebJobs.ServiceBus.ServiceBusConfiguration()
+            {
+                ConnectionString = "Endpoint=sb://dutchazuremeetupmlnk-sb-dev.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=GdQSx2qjUcj4SlDMz+cwMlaVZtxMTZG3xfu3lHtZbLA="
+            });
+
+            //if (config.IsDevelopment)
+            //{
+            //    config.UseDevelopmentSettings();
+            //}
+
+            var host = new JobHost(config);
             // The following code ensures that the WebJob will be running continuously
             host.RunAndBlock();
         }

@@ -86,8 +86,9 @@
           "properties": {
             "WEBSITE_TIME_ZONE": "W. Europe Standard Time", //Set the site timezone to Amsterdam
 
-            "sbconnstring": "[parameters('sbConnectionString')]",
             "AzureWebJobsDashboard": "[parameters('storageAccountConnectionString')]",
+            "AzureWebJobsStorage": "[parameters('storageAccountConnectionString')]",
+            "AzureWebJobsServiceBus": "[parameters('sbConnectionString')]",
 
             "topic": "[parameters('topicName')]",
             "subscription": "[parameters('subscriptionName')]"
