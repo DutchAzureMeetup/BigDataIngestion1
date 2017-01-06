@@ -8,7 +8,7 @@
     "serverFarmName": {
       "type": "string"
     },
-    "sbConnectionString": {
+    "sbManageConnectionString": {
       "type": "string"
     },
     "topicName": {
@@ -64,7 +64,7 @@
           "properties": {
             "WEBSITE_TIME_ZONE": "W. Europe Standard Time", //Set the site timezone to Amsterdam
 
-            "sbconnstring": "[parameters('sbConnectionString')]",
+            "sbManageConnectionString": "[parameters('sbManageConnectionString')]",
 
             "topic": "[parameters('topicName')]",
             "subscription": "[parameters('subscriptionName')]"
