@@ -124,7 +124,7 @@
           }
         },
         {
-          "name": "MSDeployWebJob",
+          "name": "MSDeploy",
           "type": "extensions",
           "location": "[resourceGroup().location]",
           "apiVersion": "2015-08-01",
