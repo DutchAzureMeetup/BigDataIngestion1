@@ -19,6 +19,12 @@
     },
     "webDeployPackageFileName": {
       "value": "package.zip"
+    },
+    "webJobDeployPackageFolder": {
+      "value": "ServiceBusUI.WebJob"
+    },
+    "webJobDeployPackageFileName": {
+      "value": "package.zip"
     }
   }
 }
