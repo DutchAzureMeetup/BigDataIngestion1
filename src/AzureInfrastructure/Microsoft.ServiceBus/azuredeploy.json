@@ -89,7 +89,9 @@
               ],
               "properties": {
                 "rights": [
-                  "Manage"
+                  "Manage",
+                  "Listen",
+                  "Send"
                 ]
               }
             }
@@ -143,7 +145,7 @@
           "Key": "[listkeys(resourceId('Microsoft.ServiceBus/namespaces/topics/authorizationRules', variables('serviceBusNamespaceName'),variables('serviceBusTopic').name, variables('topicListenerAuthRuleName')), '2014-09-01').primaryKey]"
         },
         "TopicManagerKey": {
-          "Name": "[variables('topicListenerAuthRuleName')]",
+          "Name": "[variables('topicManagerAuthRuleName')]",
           "Key": "[listkeys(resourceId('Microsoft.ServiceBus/namespaces/topics/authorizationRules', variables('serviceBusNamespaceName'),variables('serviceBusTopic').name, variables('topicManagerAuthRuleName')), '2014-09-01').primaryKey]"
         },
         "Subscriptions": "[variables('serviceBusTopic').subscriptions]"
