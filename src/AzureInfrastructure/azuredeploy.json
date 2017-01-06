@@ -201,6 +201,12 @@
           "webDeployPackageFileName": {
             "value": "[parameters('webDeployPackageFileName')]"
           },
+          "webJobDeployPackageFolder": {
+            "value": "[parameters('webJobDeployPackageFolder')]"
+          },
+          "webJobDeployPackageFileName": {
+            "value": "[parameters('webJobDeployPackageFileName')]"
+          },
           "_artifactsLocation": {
             "value": "[parameters('_artifactsLocation')]"
           },

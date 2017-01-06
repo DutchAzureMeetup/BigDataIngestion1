@@ -31,6 +31,20 @@
         "description": "Name of the webdeploy package"
       }
     },
+    "webJobDeployPackageFolder": {
+      "type": "string",
+      "minLength": 1,
+      "metadata": {
+        "description": "WebDeploy package location. This path is relative to the _artifactsLocation parameter"
+      }
+    },
+    "webJobDeployPackageFileName": {
+      "type": "string",
+      "minLength": 1,
+      "metadata": {
+        "description": "Name of the webdeploy package"
+      }
+    },
     "_artifactsLocation": {
       "type": "string"
     },
@@ -102,6 +116,26 @@
           },
           "properties": {
             "packageUri": "[concat(parameters('_artifactsLocation'), '/', parameters('webDeployPackageFolder'), '/', parameters('webDeployPackageFileName'), parameters('_artifactsLocationSasToken'))]",
+            "dbType": "None",
+            "connectionString": "",
+            "setParameters": {
+              "IIS Web Application Name": "[variables('webAppName')]"
+            }
+          }
+        },
+        {
+          "name": "MSDeployWebJob",
+          "type": "extensions",
+          "location": "[resourceGroup().location]",
+          "apiVersion": "2015-08-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', variables('webAppName'))]"
+          ],
+          "tags": {
+            "displayName": "webDeployWebJob"
+          },
+          "properties": {
+            "packageUri": "[concat(parameters('_artifactsLocation'), '/', parameters('webJobDeployPackageFolder'), '/', parameters('webJobDeployPackageFileName'), parameters('_artifactsLocationSasToken'))]",
             "dbType": "None",
             "connectionString": "",
             "setParameters": {
