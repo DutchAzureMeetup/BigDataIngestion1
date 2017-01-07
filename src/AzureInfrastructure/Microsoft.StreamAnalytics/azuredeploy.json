@@ -26,10 +26,10 @@
     "serviceBusTopicName": {
       "type": "string"
     },
-    "serviceBusSenderPolicyName": {
+    "serviceBusTopicPolicyName": {
       "type": "string"
     },
-    "serviceBusSenderPolicyKey": {
+    "serviceBusTopicPolicyKey": {
       "type": "string"
     }
   },
@@ -136,8 +136,8 @@
                 "properties": {
                   "topicName": "[parameters('serviceBusTopicName')]",
                   "serviceBusNamespace": "[parameters('serviceBusNamespace')]",
-                  "sharedAccessPolicyName": "[parameters('serviceBusSenderPolicyName')]",
-                  "sharedAccessPolicyKey": "[parameters('serviceBusSenderPolicyKey')]"
+                  "sharedAccessPolicyName": "[parameters('serviceBusTopicPolicyName')]",
+                  "sharedAccessPolicyKey": "[parameters('serviceBusTopicPolicyKey')]"
                 }
               }
             }
