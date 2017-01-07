@@ -6,6 +6,4 @@
     -ResourceGroupLocation "West Europe" `
     -ResourceGroupName "DAMBigData" `
     -TemplateFile "azuredeploy.json" `
-    -TemplateParametersFile "azuredeploy.parameters.json" `
-    -UploadArtifacts `
-	-ArtifactStagingDirectory "bin\debug\staging\AzureInfrastructure"
+    -TemplateParametersFile "azuredeploy.parameters.json"

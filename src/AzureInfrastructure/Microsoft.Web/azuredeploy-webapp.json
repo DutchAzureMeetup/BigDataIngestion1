@@ -19,26 +19,6 @@
     },
     "storageAccountConnectionString": {
       "type": "string"
-    },
-    "webDeployPackageFolder": {
-      "type": "string",
-      "minLength": 1,
-      "metadata": {
-        "description": "WebDeploy package location. This path is relative to the _artifactsLocation parameter"
-      }
-    },
-    "webDeployPackageFileName": {
-      "type": "string",
-      "minLength": 1,
-      "metadata": {
-        "description": "Name of the webdeploy package"
-      }
-    },
-    "_artifactsLocation": {
-      "type": "string"
-    },
-    "_artifactsLocationSasToken": {
-      "type": "securestring"
     }
   },
   "variables": {
@@ -92,26 +72,6 @@
 
             "topic": "[parameters('topicName')]",
             "subscription": "[parameters('subscriptionName')]"
-          }
-        },
-        {
-          "name": "MSDeploy",
-          "type": "extensions",
-          "location": "[resourceGroup().location]",
-          "apiVersion": "2015-08-01",
-          "dependsOn": [
-            "[resourceId('Microsoft.Web/sites', variables('webAppName'))]"
-          ],
-          "tags": {
-            "displayName": "webDeploy"
-          },
-          "properties": {
-            "packageUri": "[concat(parameters('_artifactsLocation'), '/', parameters('webDeployPackageFolder'), '/', parameters('webDeployPackageFileName'), parameters('_artifactsLocationSasToken'))]",
-            "dbType": "None",
-            "connectionString": "",
-            "setParameters": {
-              "IIS Web Application Name": "[variables('webAppName')]"
-            }
           }
         }
       ]
