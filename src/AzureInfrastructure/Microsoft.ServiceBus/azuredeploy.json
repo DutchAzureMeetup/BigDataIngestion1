@@ -29,9 +29,6 @@
       "location": "[resourceGroup().location]",
       "tags": {
         "projectName": "[parameters('configuration').projectName]",
-        "owner": "[parameters('configuration').owner]",
-        "costCenter": "[parameters('configuration').costCenter]",
-        "businessUnit": "[parameters('configuration').businessUnit]",
         "environment": "[parameters('configuration').environment]"
       },
       "kind": "Messaging",
