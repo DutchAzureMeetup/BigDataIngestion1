@@ -39,17 +39,5 @@
     <None Include="Microsoft.Web\azuredeploy-webapp.json" />
     <None Include="Microsoft.Web\azuredeploy-plan.json" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ServiceBusUI.WebJob\ServiceBusUI.WebJob.csproj">
-      <Targets>Build;Package</Targets>
-      <AdditionalProperties>PackageLocation=..\AzureInfrastructure\$(ProjectReferencesOutputPath)\ServiceBusUI.WebJob\package.zip</AdditionalProperties>
-      <IncludeFilePath>$(ProjectReferencesOutputPath)\ServiceBusUI.WebJob\package.zip</IncludeFilePath>
-    </ProjectReference>
-    <ProjectReference Include="..\ServiceBusUI\ServiceBusUI.csproj">
-      <Targets>Build;Package</Targets>
-      <AdditionalProperties>PackageLocation=..\AzureInfrastructure\$(ProjectReferencesOutputPath)\ServiceBusUI\package.zip</AdditionalProperties>
-      <IncludeFilePath>$(ProjectReferencesOutputPath)\ServiceBusUI\package.zip</IncludeFilePath>
-    </ProjectReference>
-  </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>
