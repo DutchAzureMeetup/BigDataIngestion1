@@ -157,6 +157,10 @@
       "type": "string",
       "value": "[listkeys(variables('listenAuthRuleResourceId'), variables('apiVersion')).primaryConnectionString]"
     },
+    "EventHubListenOnlyPolicyPrimaryKeyName": {
+      "type": "string",
+      "value": "[variables('listenSASKeyName')]"
+    },
     "EventHubListenOnlyPolicyPrimaryKey": {
       "type": "string",
       "value": "[listkeys(variables('listenAuthRuleResourceId'), variables('apiVersion')).primaryKey]"

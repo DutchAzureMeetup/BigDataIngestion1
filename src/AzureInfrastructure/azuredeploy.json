@@ -103,8 +103,8 @@
           "eventHubNamespace": {
             "value": "[reference('EventHub').outputs.NamespaceName.value]"
           },
-          "sharedAccessPolicyName": {
-            "value": "[reference('EventHub').outputs.DefaultSASKeyName.value]"
+          "eventhubListenPolicyName": {
+            "value": "[reference('EventHub').outputs.EventHubListenOnlyPolicyPrimaryKeyName.value]"
           },
           "eventHubName": {
             "value": "[parameters('eventHubName')]"
@@ -123,9 +123,6 @@
           },
           "serviceBusTopicPolicyName": {
             "value": "[reference('ServiceBus').outputs.serviceBusDefaultSASKeyName.value]"
-          },
-          "serviceBusTopicPolicyKey": {
-            "value": "[reference('ServiceBus').outputs.serviceBusDefaultSASKey.value]"
           }
         }
       }
