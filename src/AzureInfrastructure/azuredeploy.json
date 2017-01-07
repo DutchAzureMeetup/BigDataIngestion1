@@ -116,13 +116,13 @@
             "value": "[reference('StorageAccount').outputs.StorageAccountName.value]"
           },
           "serviceBusNamespace": {
-            "value": "[reference('ServiceBus').outputs.serviceBusNamespaceName.value]"
+            "value": "[reference('ServiceBus').outputs.ServiceBusNamespaceName.value]"
           },
           "serviceBusTopicName": {
             "value": "[reference('ServiceBus').outputs.Topic.value.Name]"
           },
           "serviceBusTopicPolicyName": {
-            "value": "[reference('ServiceBus').outputs.serviceBusDefaultSASKeyName.value]"
+            "value": "[reference('ServiceBus').outputs.ServiceBusDefaultSASKeyName.value]"
           }
         }
       }
@@ -163,7 +163,7 @@
             "value": "[reference('AppPlan').outputs.ServerFarmName.value]"
           },
           "sbManageConnectionString": {
-            "value": "[reference('ServiceBus').outputs.serviceBusNamespaceConnectionString.value]"
+            "value": "[reference('ServiceBus').outputs.ServiceBusNamespaceConnectionString.value]"
           },
           "topicName": {
             "value": "[reference('ServiceBus').outputs.Topic.value.Name]"

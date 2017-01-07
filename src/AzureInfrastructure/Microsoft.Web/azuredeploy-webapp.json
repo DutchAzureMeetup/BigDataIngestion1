@@ -63,8 +63,8 @@
 
             "AzureWebJobsServiceBus": "[parameters('sbManageConnectionString')]",
 
-            "topic": "[parameters('topicName')]",
-            "subscription": "[parameters('subscriptionName')]"
+            "Topic": "[parameters('topicName')]",
+            "Subscription": "[parameters('subscriptionName')]"
           }
         }
       ]
