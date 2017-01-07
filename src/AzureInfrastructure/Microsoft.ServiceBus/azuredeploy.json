@@ -78,15 +78,15 @@
       "type": "string",
       "value": "[variables('serviceBusNamespaceName')]"
     },
-    "serviceBusNamespaceConnectionString": {
+    "ServiceBusNamespaceConnectionString": {
       "type": "string",
       "value": "[concat('Endpoint=sb://',variables('serviceBusNamespaceName'),'.servicebus.windows.net/;SharedAccessKeyName=',variables('defaultSASKeyName'),';SharedAccessKey=',listkeys(resourceId(resourceGroup().name,'Microsoft.ServiceBus/namespaces/authorizationRules', variables('serviceBusNamespaceName'),variables('defaultSASKeyName')), '2014-09-01').primaryKey)]"
     },
-    "serviceBusDefaultSASKeyName": {
+    "ServiceBusDefaultSASKeyName": {
       "type": "string",
       "value": "[variables('defaultSASKeyName')]"
     },
-    "serviceBusDefaultSASKey": {
+    "ServiceBusDefaultSASKey": {
       "type": "string",
       "value": "[listkeys(resourceId(resourceGroup().name,'Microsoft.ServiceBus/namespaces/authorizationRules', variables('serviceBusNamespaceName'),variables('defaultSASKeyName')), '2014-09-01').primaryKey]"
     },
