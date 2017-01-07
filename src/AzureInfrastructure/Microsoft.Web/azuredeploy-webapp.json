@@ -88,7 +88,7 @@
 
             "AzureWebJobsServiceBus": "[parameters('sbTopicManageConnectionString')]",
             "AzureWebJobsDashboard": "[parameters('storageAccountConnectionString')]",
-            "AzureWebJobsStorage": "[parameters('storageAccountConnectionString')]"
+            "AzureWebJobsStorage": "[parameters('storageAccountConnectionString')]",
 
             "topic": "[parameters('topicName')]",
             "subscription": "[parameters('subscriptionName')]"
