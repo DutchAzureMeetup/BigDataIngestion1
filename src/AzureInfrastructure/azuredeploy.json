@@ -125,7 +125,7 @@
             "value": "[reference('ServiceBus').outputs.serviceBusdefaultSASKeyName.value]"
           },
           "serviceBusTopicPolicyKey": {
-            "value": "[reference('ServiceBus').outputs.Topic.value.TopicSenderKey.Key]"
+            "value": "[reference('ServiceBus').outputs.serviceBusDefaultSASKey.value]"
           }
         }
       }
