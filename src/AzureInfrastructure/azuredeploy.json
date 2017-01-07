@@ -186,8 +186,8 @@
           "serverFarmName": {
             "value": "[reference('AppPlan').outputs.ServerFarmName.value]"
           },
-          "sbConnectionString": {
-            "value": "[reference('ServiceBus').outputs.Topic.value.ListenConnectionString]"
+          "sbTopicManageConnectionString": {
+            "value": "[reference('ServiceBus').outputs.Topic.value.ManageConnectionString]"
           },
           "topicName": {
             "value": "[reference('ServiceBus').outputs.Topic.value.Name]"
