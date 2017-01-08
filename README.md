@@ -18,3 +18,13 @@ Please follow this steps to get everything working:
   6.2 Select the subscription which you want to use: **Select-AzureRmSubscription -SubscriptionId** {put here your subscriptionid}
   
 7. Deploy: **.\deploy.ps1**
+8. In the storage account create a new container called: fromeventhub
+
+## Directly from the portal
+
+1. Click this button:
+
+    <a target="_blank" id="deploy-to-azure"  href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDutchAzureMeetup%2FBigDataIngestion1%2Fmaster%2Fsrc%2FAzureInfrastructure%2Fazuredeploy.json"><img src="http://azuredeploy.net/deploybutton.png"/></a>
+
+2. Fill the required settings
+3. In the storage account create a new container called: fromeventhub
