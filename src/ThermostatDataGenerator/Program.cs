@@ -10,13 +10,26 @@ using System.Net;
 namespace ThermostatDataGenerator
 {
     public class Program
-    {
+    {        
         public static void Main(string[] args)
         {
-            var commandLineArguments = (Parsed<Options>)Parser.Default.ParseArguments<Options>(args);
+            var parserResult = Parser.Default.ParseArguments<Options>(args);
 
-            Task t = MainAsync(commandLineArguments.Value);
-            t.Wait();
+            if (parserResult is NotParsed<Options>)
+            {
+                return;
+            }
+
+            var commandLineArguments = (Parsed<Options>)Parser.Default.ParseArguments<Options>(args);
+            try
+            {
+                Task t = MainAsync(commandLineArguments.Value);
+                t.Wait();
+            }
+            catch (AggregateException ex)
+            {
+                Console.WriteLine(ex.InnerException);
+            }
         }
 
         static async Task MainAsync(Options options)
@@ -27,9 +40,18 @@ namespace ThermostatDataGenerator
 
             string connectionString = $"amqps://{policyName}:{sasToken}@{namespaceUrl}/";
 
-            Address address = new Address(connectionString);
 
-            Connection connection = await Connection.Factory.CreateAsync(address);
+            Address address = new Address(connectionString);
+            Connection connection;
+            try
+            {
+                connection = await Connection.Factory.CreateAsync(address);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"The namespace {options.Namespace} is probably wrong.", ex);
+            }
+
             Session session = new Session(connection);
 
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
@@ -50,15 +72,31 @@ namespace ThermostatDataGenerator
 
                 Message message = new Message
                 {
-                    BodySection = new Data {Binary = Encoding.UTF8.GetBytes(serializedJson)}
+                    BodySection = new Data { Binary = Encoding.UTF8.GetBytes(serializedJson) }
                 };
 
                 SenderLink sender = new SenderLink(session, "sender-link", options.EventHubName);
 
-                await sender.SendAsync(message);
+                try
+                {
+                    await sender.SendAsync(message);
+                }
+                catch (AmqpException ex)
+                {                    
+                    if (ex.Error.Condition.ToString().Contains("amqp:unauthorized-access"))
+                    {
+                        throw new Exception($"The policyname {options.PolicyName} or the SAS token {options.SasToken} is probably wrong.", ex);
+                    }                 
+                    else if (ex.Error.Condition.ToString().Contains("amqp:not-found"))
+                    {
+                        throw new Exception($"The eventhub name {options.EventHubName} is probably wrong.", ex);
+                    }
+                }
+
 
                 await sender.CloseAsync();
             }
+
         }
     }
 
@@ -76,7 +114,7 @@ namespace ThermostatDataGenerator
         [Option('s', "sastoken", HelpText = "Sastoken to access to Event Hub", Required = true)]
         public string SasToken { get; set; }
 
-        [Option('c', "customerid", HelpText = "CustomerId which you will find back in the data on the EventHub", Required = true)]
+        [Option('c', "customerid", HelpText = "CustomerId which you will find back in the data on the EventHub. (Just type in anything)", Required = true)]
         public string CustomerId { get; set; }
     }
 
