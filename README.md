@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/DutchAzureMeetup/BigDataIngestion1.svg?branch=master)](https://travis-ci.org/DutchAzureMeetup/BigDataIngestion1)
 
-
 # BigDataIngestion1
 
 ## Deploy Azure Resources with ARM 
@@ -20,7 +19,7 @@ Please follow this steps to get everything working:
 7. Deploy: **.\deploy.ps1**
 8. In the storage account create a new container called: fromeventhub
 
-## Deploy Directly from the portal
+## Deploy directly from the portal
 
 1. Click this button (hold CTRL while clicking to open in a new tab):
 
