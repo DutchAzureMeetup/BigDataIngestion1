@@ -20,9 +20,9 @@ Please follow this steps to get everything working:
 7. Deploy: **.\deploy.ps1**
 8. In the storage account create a new container called: fromeventhub
 
-## Directly from the portal
+## Deploy Directly from the portal
 
-1. Click this button:
+1. Click this button (hold CTRL while clicking to open in a new tab):
 
     <a target="_blank" id="deploy-to-azure"  href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDutchAzureMeetup%2FBigDataIngestion1%2Fmaster%2Fsrc%2FAzureInfrastructure%2Fazuredeploy.json"><img src="http://azuredeploy.net/deploybutton.png"/></a>
 
