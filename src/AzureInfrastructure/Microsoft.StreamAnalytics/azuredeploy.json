@@ -8,7 +8,7 @@
     "eventHubNamespace": {
       "type": "string"
     },
-    "sharedAccessPolicyName": {
+    "eventhubListenPolicyName": {
       "type": "string"
     },
     "eventHubName": {
@@ -26,10 +26,7 @@
     "serviceBusTopicName": {
       "type": "string"
     },
-    "serviceBusSenderPolicyName": {
-      "type": "string"
-    },
-    "serviceBusSenderPolicyKey": {
+    "serviceBusTopicPolicyName": {
       "type": "string"
     }
   },
@@ -48,9 +45,6 @@
       "location": "[resourceGroup().location]",
       "tags": {
         "projectName": "[parameters('configuration').projectName]",
-        "owner": "[parameters('configuration').owner]",
-        "costCenter": "[parameters('configuration').costCenter]",
-        "businessUnit": "[parameters('configuration').businessUnit]",
         "environment": "[parameters('configuration').environment]"
       },
       "properties": {
@@ -80,8 +74,8 @@
                 "type": "Microsoft.ServiceBus/EventHub",
                 "properties": {
                   "serviceBusNamespace": "[parameters('eventHubNamespace')]",
-                  "sharedAccessPolicyName": "[parameters('sharedAccessPolicyName')]",
-                  "sharedAccessPolicyKey": "[listkeys(resourceId('Microsoft.Eventhub/namespaces/authorizationRules', parameters('eventHubNamespace'), parameters('sharedAccessPolicyName')), '2014-09-01').primaryKey]",
+                  "sharedAccessPolicyName": "[parameters('eventhubListenPolicyName')]",
+                  "sharedAccessPolicyKey": "[listkeys(resourceId('Microsoft.EventHub/namespaces/eventhubs/authorizationRules', parameters('eventHubNamespace'), parameters('eventHubName'), parameters('eventhubListenPolicyName')), '2015-08-01').primaryKey]",
                   "eventHubName": "[parameters('eventHubName')]",
                   "consumerGroupName": "[parameters('consumerGroupName')]"
                 }
@@ -139,8 +133,8 @@
                 "properties": {
                   "topicName": "[parameters('serviceBusTopicName')]",
                   "serviceBusNamespace": "[parameters('serviceBusNamespace')]",
-                  "sharedAccessPolicyName": "[parameters('serviceBusSenderPolicyName')]",
-                  "sharedAccessPolicyKey": "[parameters('serviceBusSenderPolicyKey')]"
+                  "sharedAccessPolicyName": "[parameters('serviceBusTopicPolicyName')]",
+                  "sharedAccessPolicyKey": "[listkeys(resourceId(resourceGroup().name,'Microsoft.ServiceBus/namespaces/authorizationRules', parameters('serviceBusNamespace'),parameters('serviceBusTopicPolicyName')), '2014-09-01').primaryKey]"
                 }
               }
             }

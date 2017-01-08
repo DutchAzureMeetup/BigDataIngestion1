@@ -8,7 +8,7 @@
     "serverFarmName": {
       "type": "string"
     },
-    "sbTopicManageConnectionString": {
+    "sbManageConnectionString": {
       "type": "string"
     },
     "topicName": {
@@ -33,9 +33,6 @@
       "location": "[resourceGroup().location]",
       "tags": {
         "projectName": "[parameters('configuration').projectName]",
-        "owner": "[parameters('configuration').owner]",
-        "costCenter": "[parameters('configuration').costCenter]",
-        "businessUnit": "[parameters('configuration').businessUnit]",
         "environment": "[parameters('configuration').environment]"
       },
       "properties": {
@@ -66,12 +63,12 @@
           "properties": {
             "WEBSITE_TIME_ZONE": "W. Europe Standard Time", //Set the site timezone to Amsterdam
 
-            "AzureWebJobsServiceBus": "[parameters('sbTopicManageConnectionString')]",
+            "AzureWebJobsServiceBus": "[parameters('sbManageConnectionString')]",
             "AzureWebJobsDashboard": "[parameters('storageAccountConnectionString')]",
             "AzureWebJobsStorage": "[parameters('storageAccountConnectionString')]",
 
-            "topic": "[parameters('topicName')]",
-            "subscription": "[parameters('subscriptionName')]"
+            "Topic": "[parameters('topicName')]",
+            "Subscription": "[parameters('subscriptionName')]"
           }
         }
       ]

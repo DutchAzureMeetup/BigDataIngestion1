@@ -2,17 +2,30 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "configuration": {
-      "type": "object"
+    "projectName": {
+      "type": "string"
     },
     "eventHubName": {
       "type": "string",
       "metadata": {
         "description": "Name of the Event Hub"
       }
+    },
+    "environment": {
+      "type": "string",
+      "metadata": {
+        "description": "Environment name, like dev, test etc.."
+      }
     }
   },
   "variables": {
+    "configuration": {
+      "projectName": "[parameters('projectname')]",
+      "owner": "dutchazuremeetup",
+      "costCenter": "AB1234",
+      "businessUnit": "meetup",
+      "environment": "[parameters('environment')]"
+    }
   },
   "resources": [
     {
@@ -28,7 +41,7 @@
         },
         "parameters": {
           "configuration": {
-            "value": "[parameters('configuration')]"
+            "value": "[variables('configuration')]"
           },
           "eventHubName": {
             "value": "[parameters('eventHubName')]"
@@ -49,7 +62,7 @@
         },
         "parameters": {
           "configuration": {
-            "value": "[parameters('configuration')]"
+            "value": "[variables('configuration')]"
           }
         }
       }
@@ -67,7 +80,7 @@
         },
         "parameters": {
           "configuration": {
-            "value": "[parameters('configuration')]"
+            "value": "[variables('configuration')]"
           }
         }
       }
@@ -85,13 +98,13 @@
         },
         "parameters": {
           "configuration": {
-            "value": "[parameters('configuration')]"
+            "value": "[variables('configuration')]"
           },
           "eventHubNamespace": {
             "value": "[reference('EventHub').outputs.NamespaceName.value]"
           },
-          "sharedAccessPolicyName": {
-            "value": "[reference('EventHub').outputs.DefaultSASKeyName.value]"
+          "eventhubListenPolicyName": {
+            "value": "[reference('EventHub').outputs.EventHubListenOnlyPolicyPrimaryKeyName.value]"
           },
           "eventHubName": {
             "value": "[parameters('eventHubName')]"
@@ -103,16 +116,13 @@
             "value": "[reference('StorageAccount').outputs.StorageAccountName.value]"
           },
           "serviceBusNamespace": {
-            "value": "[reference('ServiceBus').outputs.serviceBusNamespaceName.value]"
+            "value": "[reference('ServiceBus').outputs.ServiceBusNamespaceName.value]"
           },
           "serviceBusTopicName": {
             "value": "[reference('ServiceBus').outputs.Topic.value.Name]"
           },
-          "serviceBusSenderPolicyName": {
-            "value": "[reference('ServiceBus').outputs.Topic.value.TopicSenderKey.Name]"
-          },
-          "serviceBusSenderPolicyKey": {
-            "value": "[reference('ServiceBus').outputs.Topic.value.TopicSenderKey.Key]"
+          "serviceBusTopicPolicyName": {
+            "value": "[reference('ServiceBus').outputs.ServiceBusDefaultSASKeyName.value]"
           }
         }
       }
@@ -129,7 +139,7 @@
         },
         "parameters": {
           "configuration": {
-            "value": "[parameters('configuration')]"
+            "value": "[variables('configuration')]"
           }
         }
       }
@@ -147,13 +157,13 @@
         },
         "parameters": {
           "configuration": {
-            "value": "[parameters('configuration')]"
+            "value": "[variables('configuration')]"
           },
           "serverFarmName": {
             "value": "[reference('AppPlan').outputs.ServerFarmName.value]"
           },
-          "sbTopicManageConnectionString": {
-            "value": "[reference('ServiceBus').outputs.Topic.value.ManageConnectionString]"
+          "sbManageConnectionString": {
+            "value": "[reference('ServiceBus').outputs.ServiceBusNamespaceConnectionString.value]"
           },
           "topicName": {
             "value": "[reference('ServiceBus').outputs.Topic.value.Name]"
@@ -168,6 +178,5 @@
       }
     }
   ],
-  "outputs": {
-  }
+  "outputs": {}
 }

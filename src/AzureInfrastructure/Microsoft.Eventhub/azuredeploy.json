@@ -74,9 +74,6 @@
       },
       "tags": {
         "projectName": "[parameters('configuration').projectName]",
-        "owner": "[parameters('configuration').owner]",
-        "costCenter": "[parameters('configuration').costCenter]",
-        "businessUnit": "[parameters('configuration').businessUnit]",
         "environment": "[parameters('configuration').environment]"
       },
       "resources": [
@@ -159,6 +156,10 @@
     "EventHubListenOnlyConnectionString": {
       "type": "string",
       "value": "[listkeys(variables('listenAuthRuleResourceId'), variables('apiVersion')).primaryConnectionString]"
+    },
+    "EventHubListenOnlyPolicyPrimaryKeyName": {
+      "type": "string",
+      "value": "[variables('listenSASKeyName')]"
     },
     "EventHubListenOnlyPolicyPrimaryKey": {
       "type": "string",
