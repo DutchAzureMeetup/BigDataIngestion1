@@ -3,16 +3,22 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "projectName": {
-      "type": "string"
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 20
     },
     "eventHubName": {
       "type": "string",
+      "defaultValue": "dambg",
       "metadata": {
         "description": "Name of the Event Hub"
       }
     },
     "environment": {
       "type": "string",
+      "defaultValue": "dev",
+      "minLength": 3,
+      "maxLength": 4,
       "metadata": {
         "description": "Environment name, like dev, test etc.."
       }
