@@ -10,8 +10,7 @@
     "Microsoft.NETCore.App": {
       "type": "platform",
       "version": "1.0.1"
-    },
-    "CommandLineParser": "2.1.1-beta"
+    }    
   },
   "frameworks": {
     "netcoreapp1.0": {
