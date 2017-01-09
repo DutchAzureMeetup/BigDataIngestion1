@@ -1,0 +1,74 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v1.0",
+    "signature": "3be91c27e9c95b11301a5dd4e2dfe0f44f03bcc0"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v1.0": {
+      "ThermostatDataGenerator/1.0.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1",
+          "AMQPNetLite": "1.2.2"
+        },
+        "runtime": {
+          "ThermostatDataGenerator.dll": {}
+        }
+      },
+      "AMQPNetLite/1.2.2": {
+        "dependencies": {
+          "System.Collections.NonGeneric": "4.0.0",
+          "System.Runtime.Serialization.Primitives": "4.1.1"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Amqp.dll": {}
+        }
+      },
+      "Newtonsoft.Json/9.0.1": {
+        "dependencies": {
+          "System.Runtime.Serialization.Primitives": "4.1.1"
+        },
+        "runtime": {
+          "lib/netstandard1.0/Newtonsoft.Json.dll": {}
+        }
+      },
+      "System.Collections.NonGeneric/4.0.0": {
+        "runtime": {
+          "lib/dotnet/System.Collections.NonGeneric.dll": {}
+        }
+      },
+      "System.Runtime.Serialization.Primitives/4.1.1": {
+        "runtime": {
+          "lib/netstandard1.3/System.Runtime.Serialization.Primitives.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ThermostatDataGenerator/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AMQPNetLite/1.2.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-v6HtoJRT3YS0NDwrWHrT23cNeQWFm/pokQXQ/AX2EkwqDC3YgY4YSraUiYCzgyKbgfwiYHJsK1HOonpbUd7miw=="
+    },
+    "Newtonsoft.Json/9.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-U82mHQSKaIk+lpSVCbWYKNavmNH1i5xrExDEquU1i6I5pV6UMOqRnJRSlKO3cMPfcpp0RgDY+8jUXHdQ4IfXvw=="
+    },
+    "System.Collections.NonGeneric/4.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rVgwrFBMkmp8LI6GhAYd6Bx+2uLIXjRfNg6Ie+ASfX8ESuh9e2HNxFy2yh1MPIXZq3OAYa+0mmULVwpnEC6UDA=="
+    },
+    "System.Runtime.Serialization.Primitives/4.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HZ6Du5QrTG8MNJbf4e4qMO3JRAkIboGT5Fk804uZtg3Gq516S7hAqTm2UZKUHa7/6HUGdVy3AqMQKbns06G/cg=="
+    }
+  }
+}
