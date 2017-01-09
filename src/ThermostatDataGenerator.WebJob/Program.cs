@@ -14,7 +14,7 @@ namespace ThermostatDataGenerator.WebJob
         {
             try
             {
-                Task t = MainAsync();
+                Task t = MainAsync(CreateOptions());
                 t.Wait();
             }
             catch (AggregateException ex)
@@ -23,15 +23,38 @@ namespace ThermostatDataGenerator.WebJob
             }
         }
 
-        static async Task MainAsync()
+        static Options CreateOptions()
         {
-            string customerId = "MarcoMansi";
-            string nameSpace = String.Empty;
-            string policyName = String.Empty;
-            string eventHubName = String.Empty;
-            string sasToken = WebUtility.UrlEncode(String.Empty);
+            string connectionString = String.Empty;
 
-            string namespaceUrl = $"{nameSpace}.servicebus.windows.net";
+            Options options = new Options();
+            options.CustomerId = new Random().Next(100, 999).ToString();
+            options.EventHubName = GetConnectionStringPart("EntityPath=", connectionString);
+            options.Namespace = GetConnectionStringPart("Endpoint=", connectionString).Replace("sb://", "").Split('.')[0];
+            options.PolicyName = GetConnectionStringPart("SharedAccessKeyName=", connectionString);
+            options.SasToken = GetConnectionStringPart("SharedAccessKey=", connectionString);
+            return options;
+        }
+
+        static string GetConnectionStringPart(string partName, string connectionString)
+        {
+            int indexOfPart = connectionString.IndexOf(partName, StringComparison.Ordinal);
+            int indexOfPartEnd = connectionString.IndexOf(";", indexOfPart, StringComparison.Ordinal);
+            if (indexOfPartEnd == -1) // in case of EntityPath there is no ;
+                indexOfPartEnd = connectionString.Length;
+
+            int indexOfBeginPartValue = indexOfPart + partName.Length;
+            int lengthOfPartValue = indexOfPartEnd - indexOfBeginPartValue;
+
+            return connectionString.Substring(indexOfBeginPartValue, lengthOfPartValue);
+        }
+
+        static async Task MainAsync(Options options)
+        {
+            string namespaceUrl = $"{options.Namespace}.servicebus.windows.net";
+            string policyName = options.PolicyName;
+            string sasToken = WebUtility.UrlEncode(options.SasToken);
+
             string connectionString = $"amqps://{policyName}:{sasToken}@{namespaceUrl}/";
 
             Address address = new Address(connectionString);
@@ -42,7 +65,7 @@ namespace ThermostatDataGenerator.WebJob
             }
             catch (Exception ex)
             {
-                throw new Exception($"The namespace {nameSpace} is probably wrong.", ex);
+                throw new Exception($"The namespace {options.Namespace} is probably wrong.", ex);
             }
 
             Session session = new Session(connection);
@@ -58,7 +81,7 @@ namespace ThermostatDataGenerator.WebJob
                 {
                     Date = DateTime.Now,
                     ElectricityUsage = rnd.Next(0, 500),
-                    CustomerId = customerId
+                    CustomerId = options.CustomerId
                 };
 
                 string serializedJson = JsonConvert.SerializeObject(data);
@@ -68,7 +91,7 @@ namespace ThermostatDataGenerator.WebJob
                     BodySection = new Data { Binary = Encoding.UTF8.GetBytes(serializedJson) }
                 };
 
-                SenderLink sender = new SenderLink(session, "sender-link", eventHubName);
+                SenderLink sender = new SenderLink(session, "sender-link", options.EventHubName);
 
                 try
                 {
@@ -78,18 +101,32 @@ namespace ThermostatDataGenerator.WebJob
                 {
                     if (ex.Error.Condition.ToString().Contains("amqp:unauthorized-access"))
                     {
-                        throw new Exception($"The policyname {policyName} or the SAS token {sasToken} is probably wrong.", ex);
+                        throw new Exception($"The policyname {options.PolicyName} or the SAS token {options.SasToken} is probably wrong.", ex);
                     }
                     else if (ex.Error.Condition.ToString().Contains("amqp:not-found"))
                     {
-                        throw new Exception($"The eventhub name {eventHubName} is probably wrong.", ex);
+                        throw new Exception($"The eventhub name {options.EventHubName} is probably wrong.", ex);
                     }
                 }
-
+                
                 await sender.CloseAsync();
             }
 
         }
+    }
+
+    class Options
+    {
+
+        public string Namespace { get; set; }
+
+        public string PolicyName { get; set; }
+
+        public string EventHubName { get; set; }
+
+        public string SasToken { get; set; }
+
+        public string CustomerId { get; set; }
     }
 
     class ThermostatData
