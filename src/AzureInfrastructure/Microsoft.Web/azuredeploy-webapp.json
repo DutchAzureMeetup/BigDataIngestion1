@@ -19,6 +19,12 @@
     },
     "storageAccountConnectionString": {
       "type": "string"
+    },
+    "repoUrl": {
+      "type": "string"
+    },
+    "branch": {
+      "type": "string"
     }
   },
   "variables": {
@@ -62,13 +68,25 @@
           ],
           "properties": {
             "WEBSITE_TIME_ZONE": "W. Europe Standard Time", //Set the site timezone to Amsterdam
-
             "AzureWebJobsServiceBus": "[parameters('sbManageConnectionString')]",
             "AzureWebJobsDashboard": "[parameters('storageAccountConnectionString')]",
             "AzureWebJobsStorage": "[parameters('storageAccountConnectionString')]",
-
             "Topic": "[parameters('topicName')]",
             "Subscription": "[parameters('subscriptionName')]"
+          }
+        },
+        {
+          "apiVersion": "2015-08-01",
+          "name": "web",
+          "type": "sourcecontrols",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/Sites', variables('webAppName'))]",
+            "[concat('Microsoft.Web/Sites/', variables('webAppName'), '/config/appsettings')]"
+          ],
+          "properties": {
+            "RepoUrl": "[parameters('repoUrl')]",
+            "branch": "[parameters('branch')]",
+            "IsManualIntegration": true
           }
         }
       ]

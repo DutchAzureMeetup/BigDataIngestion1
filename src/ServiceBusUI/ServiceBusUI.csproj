@@ -119,7 +119,6 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Properties\webjobs-list.json" />
-    <None Include="Properties\PublishProfiles\dutchazuremeetupmlnk-webapp-dev - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="index.html" />
     <Content Include="Scripts\jquery-1.6.4.js" />

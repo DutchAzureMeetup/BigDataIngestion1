@@ -22,6 +22,15 @@
       "metadata": {
         "description": "Environment name, like dev, test etc.."
       }
+    },
+    "repoUrl": {
+      "type": "string",
+      "defaultValue": "https://github.com/DutchAzureMeetup/BigDataIngestion1.git"
+
+    },
+    "branch": {
+      "type": "string",
+      "defaultValue": "master"
     }
   },
   "variables": {
@@ -179,6 +188,12 @@
           },
           "storageAccountConnectionString": {
             "value": "[reference('StorageAccount').outputs.StorageAccountConnectionString.value]"
+          },
+          "repoUrl": {
+            "value": "[parameters('repoUrl')]"
+          },
+          "branch": {
+            "value": "[parameters('branch')]"
           }
         }
       }
