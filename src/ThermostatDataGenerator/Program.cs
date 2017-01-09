@@ -9,7 +9,7 @@ using System.Net;
 namespace ThermostatDataGenerator
 {
     public class Program
-    {
+    {        
         public static void Main(string[] args)
         {
             if (args.Length == 0)
@@ -57,6 +57,7 @@ namespace ThermostatDataGenerator
             string sasToken = WebUtility.UrlEncode(options.SasToken);
 
             string connectionString = $"amqps://{policyName}:{sasToken}@{namespaceUrl}/";
+
 
             Address address = new Address(connectionString);
             Connection connection;

@@ -6,4 +6,4 @@
     -ResourceGroupLocation "West Europe" `
     -ResourceGroupName "DAMBigData" `
     -TemplateFile "azuredeploy.json" `
-    -TemplateParametersFile "azuredeploy.parameters.json" 
+    -TemplateParametersFile "azuredeploy.parameters.json"
