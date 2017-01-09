@@ -18,6 +18,7 @@ Please follow this steps to get everything working:
   
 7. Deploy: **.\deploy.ps1**
 8. In the storage account create a new container called: fromeventhub
+9. Start the Stream Analytics Job
 
 ## Deploy directly from the portal
 
@@ -27,3 +28,4 @@ Please follow this steps to get everything working:
 
 2. Fill the required settings
 3. In the storage account create a new container called: fromeventhub
+4. Start the Stream Analytics Job
