@@ -9,7 +9,7 @@
     },
     "eventHubName": {
       "type": "string",
-      "defaultValue": "dambg",
+      "defaultValue": "dambd",
       "metadata": {
         "description": "Name of the Event Hub"
       }
