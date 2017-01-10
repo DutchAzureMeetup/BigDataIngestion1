@@ -15,7 +15,7 @@ The Stream Analytics Job will pull the events from the Event Hub (input) and as 
  Then an App Service will show the events from the Service Bus in a web interface.
 
 ## Let's start ##
-In the following steps we are going to create with an ARM template all the resources needed to setup and communicate with the Stream Analytics.
+In the following steps we are going to create with an ARM template all the resources needed to setup and communicate with the Stream Analytics.  
 The following resources will be created:
 
   * Storage Account
