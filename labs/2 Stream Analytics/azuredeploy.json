@@ -1,0 +1,164 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "projectName": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 20
+    },
+    "eventHubName": {
+      "type": "string",
+      "defaultValue": "dambd",
+      "metadata": {
+        "description": "Name of the Event Hub"
+      }
+    },
+    "environment": {
+      "type": "string",
+      "defaultValue": "dev",
+      "minLength": 3,
+      "maxLength": 4,
+      "metadata": {
+        "description": "Environment name, like dev, test etc.."
+      }
+    },
+    "repoUrl": {
+      "type": "string",
+      "defaultValue": "https://github.com/DutchAzureMeetup/BigDataIngestion1.git"
+
+    },
+    "branch": {
+      "type": "string",
+      "defaultValue": "master"
+    }
+  },
+  "variables": {
+    "configuration": {
+      "projectName": "[parameters('projectname')]",
+      "owner": "dutchazuremeetup",
+      "costCenter": "AB1234",
+      "businessUnit": "meetup",
+      "environment": "[parameters('environment')]"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2015-01-01",
+      "name": "EventHub",
+      "type": "Microsoft.Resources/deployments",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          //Dit must be a public url (in Linked template local file system is not supported)
+          "uri": "https://raw.githubusercontent.com/DutchAzureMeetup/BigDataIngestion1/master/src/AzureInfrastructure/Microsoft.Eventhub/azuredeploy.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "configuration": {
+            "value": "[variables('configuration')]"
+          },
+          "eventHubName": {
+            "value": "[parameters('eventHubName')]"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "2015-01-01",
+      "name": "StorageAccount",
+      "type": "Microsoft.Resources/deployments",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          //Dit must be a public url (in Linked template local file system is not supported)
+          "uri": "https://raw.githubusercontent.com/DutchAzureMeetup/BigDataIngestion1/master/src/AzureInfrastructure/Microsoft.Storage/azuredeploy.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "configuration": {
+            "value": "[variables('configuration')]"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "2015-01-01",
+      "name": "ServiceBus",
+      "type": "Microsoft.Resources/deployments",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          //Dit must be a public url (in Linked template local file system is not supported)
+          "uri": "https://raw.githubusercontent.com/DutchAzureMeetup/BigDataIngestion1/master/src/AzureInfrastructure/Microsoft.ServiceBus/azuredeploy.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "configuration": {
+            "value": "[variables('configuration')]"
+          }
+        }
+      }
+    },
+    { // App Plan
+      "apiVersion": "2015-01-01",
+      "name": "AppPlan",
+      "type": "Microsoft.Resources/deployments",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/DutchAzureMeetup/BigDataIngestion1/master/src/AzureInfrastructure/Microsoft.Web/azuredeploy-plan.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "configuration": {
+            "value": "[variables('configuration')]"
+          }
+        }
+      }
+    },
+    {
+      //Web App
+      "apiVersion": "2015-01-01",
+      "name": "WebApp",
+      "type": "Microsoft.Resources/deployments",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/DutchAzureMeetup/BigDataIngestion1/master/src/AzureInfrastructure/Microsoft.Web/azuredeploy-webapp.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "configuration": {
+            "value": "[variables('configuration')]"
+          },
+          "serverFarmName": {
+            "value": "[reference('AppPlan').outputs.ServerFarmName.value]"
+          },
+          "sbConnectionString": {
+            "value": "[reference('ServiceBus').outputs.ServiceBusNamespaceConnectionString.value]"
+          },
+          "topicName": {
+            "value": "[reference('ServiceBus').outputs.Topic.value.Name]"
+          },
+          "subscriptionName": {
+            "value": "[reference('ServiceBus').outputs.Topic.value.Subscriptions[0].name]"
+          },
+          "storageAccountConnectionString": {
+            "value": "[reference('StorageAccount').outputs.StorageAccountConnectionString.value]"
+          },
+          "repoUrl": {
+            "value": "[parameters('repoUrl')]"
+          },
+          "branch": {
+            "value": "[parameters('branch')]"
+          },
+          "ehConnectionString":{
+            "value": "[reference('EventHub').outputs.EventHubSendOnlyConnectionString.value]"
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {}
+}
