@@ -22,15 +22,6 @@
       "metadata": {
         "description": "Environment name, like dev, test etc.."
       }
-    },
-    "repoUrl": {
-      "type": "string",
-      "defaultValue": "https://github.com/DutchAzureMeetup/BigDataIngestion1.git"
-
-    },
-    "branch": {
-      "type": "string",
-      "defaultValue": "master"
     }
   },
   "variables": {
@@ -40,7 +31,9 @@
       "costCenter": "AB1234",
       "businessUnit": "meetup",
       "environment": "[parameters('environment')]"
-    }
+    },
+    "repoUrl": "https://github.com/DutchAzureMeetup/BigDataIngestion1.git",
+    "branch": "master"
   },
   "resources": [
     {
@@ -148,12 +141,12 @@
             "value": "[reference('StorageAccount').outputs.StorageAccountConnectionString.value]"
           },
           "repoUrl": {
-            "value": "[parameters('repoUrl')]"
+            "value": "[variables('repoUrl')]"
           },
           "branch": {
-            "value": "[parameters('branch')]"
+            "value": "[variables('branch')]"
           },
-          "ehConnectionString":{
+          "ehConnectionString": {
             "value": "[reference('EventHub').outputs.EventHubSendOnlyConnectionString.value]"
           }
         }
