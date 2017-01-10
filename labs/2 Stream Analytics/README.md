@@ -15,7 +15,7 @@ The following resources will be created:
   * A webjob to generate Thermostat event data and send it to the Event Hub (the same as the previous lab, but it's running     
   automatically in a WebJob)
 
-## Step 1 Deploy resources in Azure ##
+## **Step 1** Deploy resources in Azure ##
 
 Click the following button (hold CTRL while clicking to open in a new tab):
 
@@ -25,70 +25,70 @@ And fill the forms:
 
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/1.jpg?raw=true)
 
-## Step 2  ##
+## **Step 2**  ##
 
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/2.jpg?raw=true)
 
-## Step 3  ##
+## **Step 3**  ##
 
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/3.jpg?raw=true)
 
-## Step 4  ##
+## **Step 4**  ##
 
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/4.jpg?raw=true)
 
-## Step 5  ##
+## **Step 5**  ##
 
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/5.jpg?raw=true)
 
-## Step 6  ##
+## **Step 6**  ##
 
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/6.jpg?raw=true)
 
-## Step 7  ##
+## **Step 7**  ##
 
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/7.jpg?raw=true)
 
-## Step 8  ##
+## **Step 8**  ##
 
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/8.jpg?raw=true)
 
-## Step 9  ##
+## **Step 9**  ##
 
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/9.jpg?raw=true)
 
-## Step 10  ##
+## **Step 10**  ##
 
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/10.jpg?raw=true)
 
-## Step 11  ##
+## **Step 11**  ##
 
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/11.jpg?raw=true)
 
-## Step 12  ##
+## **Step 12**  ##
 
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/12.jpg?raw=true)
 
-## Step 13  ##
+## **Step 13**  ##
 
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/13.jpg?raw=true)
 
-## Step 14  ##
+## **Step 14**  ##
 
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/14.jpg?raw=true)
 
-## Step 15  ##
+## **Step 15**  ##
 
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/15.jpg?raw=true)
 
-## Step 16  ##
+## **Step 16**  ##
 
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/16.jpg?raw=true)
 
-## Step 17  ##
+## **Step 17**  ##
 
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/17.jpg?raw=true)
 
-## Step 18  ##
+## **Step 18**  ##
 
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/18.jpg?raw=true)
