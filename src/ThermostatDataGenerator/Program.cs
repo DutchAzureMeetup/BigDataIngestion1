@@ -17,7 +17,13 @@ namespace ThermostatDataGenerator
 
             try
             {
-                Task t = MainAsync(CreateOptions(args[0]));
+                Options options = CreateOptions(args[0]);
+                if (args.Length > 1)
+                {
+                    options.CustomerId = args[1];
+                }
+
+                Task t = MainAsync(options);
                 t.Wait();
             }
             catch (AggregateException ex)
@@ -28,13 +34,21 @@ namespace ThermostatDataGenerator
 
         static Options CreateOptions(string connectionString)
         {
-            Options options = new Options();
-            options.CustomerId = new Random().Next(100, 999).ToString();
-            options.EventHubName = GetConnectionStringPart("EntityPath=", connectionString);
-            options.Namespace = GetConnectionStringPart("Endpoint=", connectionString).Replace("sb://", "").Split('.')[0];
-            options.PolicyName = GetConnectionStringPart("SharedAccessKeyName=", connectionString);
-            options.SasToken = GetConnectionStringPart("SharedAccessKey=", connectionString);
-            return options;
+            try
+            {
+                Options options = new Options();
+                options.CustomerId = new Random().Next(100, 999).ToString();
+                options.EventHubName = GetConnectionStringPart("EntityPath=", connectionString);
+                options.Namespace = GetConnectionStringPart("Endpoint=", connectionString).Replace("sb://", "").Split('.')[0];
+                options.PolicyName = GetConnectionStringPart("SharedAccessKeyName=", connectionString);
+                options.SasToken = GetConnectionStringPart("SharedAccessKey=", connectionString);
+                return options;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Failed parsing connectionstring. Copy the Primary Connectionstring from the eventhub and pass it as a parameter");
+            }
+            
         }
 
         static string GetConnectionStringPart(string partName, string connectionString)
@@ -77,7 +91,7 @@ namespace ThermostatDataGenerator
             while (true)
             {
                 DateTime date = DateTime.Now;
-                Console.WriteLine($"{date} Generating data");
+                Console.WriteLine($"{date} Generating data for customer {options.CustomerId}");
 
                 ThermostatData data = new ThermostatData()
                 {
