@@ -29,7 +29,7 @@ namespace ThermostatDataGenerator.WebJob
             string connectionString = CloudConfigurationManager.GetSetting("AzureWebJobsEventHub");
             
             Options options = new Options();
-            options.CustomerId = new Random().Next(100, 999).ToString();
+            options.CustomerId = CloudConfigurationManager.GetSetting("ProjectName");
             options.EventHubName = GetConnectionStringPart("EntityPath=", connectionString);
             options.Namespace = GetConnectionStringPart("Endpoint=", connectionString).Replace("sb://", "").Split('.')[0];
             options.PolicyName = GetConnectionStringPart("SharedAccessKeyName=", connectionString);

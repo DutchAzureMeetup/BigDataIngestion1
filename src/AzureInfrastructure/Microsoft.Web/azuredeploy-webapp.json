@@ -76,7 +76,8 @@
             "AzureWebJobsDashboard": "[parameters('storageAccountConnectionString')]",
             "AzureWebJobsStorage": "[parameters('storageAccountConnectionString')]",
             "Topic": "[parameters('topicName')]",
-            "Subscription": "[parameters('subscriptionName')]"
+            "Subscription": "[parameters('subscriptionName')]",
+            "ProjectName": "[parameters('configuration').projectName]"
           }
         },
         {
