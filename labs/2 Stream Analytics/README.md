@@ -5,6 +5,7 @@
 
 ## **Description** ##
 In this lab we will create a Stream Analytics Job.
+
 A Webjob is creating events like electricity usage and sending them to an Event Hub. 
 
 The Stream Analytics Job will pull the events from the Event Hub (input) and as output:
