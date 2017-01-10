@@ -177,7 +177,7 @@
           "serverFarmName": {
             "value": "[reference('AppPlan').outputs.ServerFarmName.value]"
           },
-          "sbManageConnectionString": {
+          "sbConnectionString": {
             "value": "[reference('ServiceBus').outputs.ServiceBusNamespaceConnectionString.value]"
           },
           "topicName": {
@@ -194,6 +194,9 @@
           },
           "branch": {
             "value": "[parameters('branch')]"
+          },
+          "ehConnectionString":{
+            "value": "[reference('EventHub').outputs.EventHubSendOnlyConnectionString.value]"
           }
         }
       }

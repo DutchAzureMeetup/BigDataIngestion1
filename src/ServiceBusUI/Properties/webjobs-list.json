@@ -3,6 +3,9 @@
   "WebJobs": [
     {
       "filePath": "../ServiceBusUI.WebJob/ServiceBusUI.WebJob.csproj"
+    },
+    {
+      "filePath": "../ThermostatDataGenerator.WebJob/ThermostatDataGenerator.WebJob.csproj"
     }
   ]
 }

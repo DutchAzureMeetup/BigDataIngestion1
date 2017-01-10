@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Amqp;
 using Amqp.Framing;
+using Microsoft.Azure;
 using Newtonsoft.Json;
 
 namespace ThermostatDataGenerator.WebJob
@@ -25,8 +26,8 @@ namespace ThermostatDataGenerator.WebJob
 
         static Options CreateOptions()
         {
-            string connectionString = String.Empty;
-
+            string connectionString = CloudConfigurationManager.GetSetting("AzureWebJobsEventHub");
+            
             Options options = new Options();
             options.CustomerId = new Random().Next(100, 999).ToString();
             options.EventHubName = GetConnectionStringPart("EntityPath=", connectionString);

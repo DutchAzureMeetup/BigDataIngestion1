@@ -8,7 +8,7 @@
     "serverFarmName": {
       "type": "string"
     },
-    "sbManageConnectionString": {
+    "sbConnectionString": {
       "type": "string"
     },
     "topicName": {
@@ -25,7 +25,10 @@
     },
     "branch": {
       "type": "string"
-    }
+    },
+    "ehConnectionString": {
+    "type": "string"  
+    }  
   },
   "variables": {
     "webAppName": "[concat(parameters('configuration').projectName,'-webapp-',parameters('configuration').environment)]",
@@ -68,7 +71,8 @@
           ],
           "properties": {
             "WEBSITE_TIME_ZONE": "W. Europe Standard Time", //Set the site timezone to Amsterdam
-            "AzureWebJobsServiceBus": "[parameters('sbManageConnectionString')]",
+            "AzureWebJobsServiceBus": "[parameters('sbConnectionString')]",
+            "AzureWebJobsEventHub": "ehConnectionString",
             "AzureWebJobsDashboard": "[parameters('storageAccountConnectionString')]",
             "AzureWebJobsStorage": "[parameters('storageAccountConnectionString')]",
             "Topic": "[parameters('topicName')]",
