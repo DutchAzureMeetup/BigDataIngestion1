@@ -42,6 +42,8 @@ And fill the forms:
 
 ## **Step 3**  ##
 
+The deployment will take around 5 minutes
+
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/3.jpg?raw=true)
 
 ## **Step 4**  ##
@@ -127,3 +129,30 @@ GROUP BY CustomerId, HoppingWindow(second, 10 , 5)
 ## **Step 18**  ##
 
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/18.jpg?raw=true)
+
+In few minutes the job will start
+
+## The Stream Analytics Job is created! ##
+
+We have created a Stream Analytics Job, now let's check the outputs. 
+
+# Check the output sent to the Service Bus #
+
+Go back to the Resource Group: 
+
+## **Step 19**  ##
+
+![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/19.jpg?raw=true)
+
+## **Step 20**  ##
+
+Here we see the messages sent from Stream Analytics to the Service Bus Topic.
+The App Service is taking the messages with a WebJob and visualize them in HTML. 
+
+Every 5 second a message will appear with the average electricity consumption of the past 10 seconds.  
+The messages are crated in Stream Analytics (see the previous query).
+
+![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/20.jpg?raw=true)
+
+# Check the output sent to Blob Storage #
+
