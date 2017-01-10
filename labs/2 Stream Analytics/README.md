@@ -75,6 +75,13 @@ And fill the forms:
 
 ## **Step 14**  ##
 
+Easy for copy/paste in this step: 
+
+  * thermostatingestionbloboutput
+  * fromeventhub
+  * thermostatdata/fdate={date}/{time}
+
+
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/14.jpg?raw=true)
 
 ## **Step 15**  ##
@@ -87,6 +94,18 @@ And fill the forms:
 
 ## **Step 17**  ##
 
+Copy and paste the following query:
+```SQL
+SELECT *
+INTO   thermostatingestionbloboutput
+FROM   thermostatingestioninput TIMESTAMP BY Date
+PARTITION BY PartitionId
+
+SELECT CustomerId, COUNT(*) AS Count, AVG(ElectricityUsage)
+INTO   thermostatingestionservicebusoutput
+FROM   thermostatingestioninput TIMESTAMP BY Date
+GROUP BY CustomerId, HoppingWindow(second, 10 , 5)
+```
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/17.jpg?raw=true)
 
 ## **Step 18**  ##
