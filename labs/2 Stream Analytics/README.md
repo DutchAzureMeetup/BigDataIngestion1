@@ -142,7 +142,7 @@ Go back to the Resource Group:
 
 ## **Step 19**  ##
 
-![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/19.jpg?raw=true)
+![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/19.png?raw=true)
 
 ## **Step 20**  ##
 
