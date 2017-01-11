@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/DutchAzureMeetup/BigDataIngestion1.svg?branch=master)](https://travis-ci.org/DutchAzureMeetup/BigDataIngestion1)
 
-# BigDataIngestion1
+# BigDataIngestion Part 1
 
 ## Option 1: Deploy directly from the portal
 
