@@ -156,3 +156,7 @@ The messages are crated in Stream Analytics (see the previous query).
 
 # Check the output sent to Blob Storage #
 
+Go back to the Resource Group: 
+
+![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/21.jpg?raw=true)
+
