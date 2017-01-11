@@ -167,10 +167,10 @@ Go back to the Resource Group:
 
 In the folder thermostatdata a new foder will be created with this format:
 
-fdate=YYYY-MM-DD and in this folder a subfolder with will be created for every hour.
+fdate=YYYY-MM-DD and in this folder a subfolder will be created for every hour.
 
 Finally you will see two CSV files.
 
-Why two?   
+### Why two? ###   
 The Event Hub where Stream Analytics is getting the event from has two partitions. 
 The **PARTITION BY PartitionId** in the first query in the Stream Analytics job is writing a file for each Event Hub partition.
