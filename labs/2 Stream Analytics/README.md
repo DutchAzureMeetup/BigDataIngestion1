@@ -10,9 +10,9 @@ A Webjob is creating events like electricity usage and sending them to an Event 
 
 The Stream Analytics Job will pull the events from the Event Hub (input) and as output:
   * save the events in a Blob Storage Account in a CSV file. 
-  * every 5 seconds send the average electricity usage of the last 10 second to a Service Bus
+  * every 5 seconds send the average electricity usage of the last 10 second to a Service Bus  
 
- Then an App Service will show the events from the Service Bus in a web interface.
+Then an App Service will show the events from the Service Bus in a web interface.
 
 ## **Let's start**
 In the following steps we are going to create with an ARM template all the resources needed to setup and communicate with the Stream Analytics.  
