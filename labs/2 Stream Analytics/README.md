@@ -177,7 +177,7 @@ Finally you will see two CSV files.
 The Event Hub where Stream Analytics is getting the event from has two partitions. 
 The **PARTITION BY PartitionId** in the first query in the Stream Analytics job is writing a file for each Event Hub partition.
 
-## ** Step 23**
+## **Step 23**
 
 You can download the files craeted: 
 
