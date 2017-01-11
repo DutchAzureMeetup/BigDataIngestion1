@@ -27,5 +27,4 @@ Please follow this steps to get everything working:
     <a target="_blank" id="deploy-to-azure"  href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDutchAzureMeetup%2FBigDataIngestion1%2Fmaster%2Fsrc%2FAzureInfrastructure%2Fazuredeploy.json"><img src="http://azuredeploy.net/deploybutton.png"/></a>
 
 2. Fill the required settings
-3. In the storage account create a new container called: fromeventhub
-4. Start the Stream Analytics Job
+3. Start the Stream Analytics Job
