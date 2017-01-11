@@ -28,6 +28,8 @@ The following resources will be created:
 
 ## **Step 1** Deploy resources in Azure
 
+__Delete the Resource Group created in the previous lab.__
+
 Click the following button (hold CTRL while clicking to open in a new tab):
 
  <a target="_blank" id="deploy-to-azure"  href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDutchAzureMeetup%2FBigDataIngestion1%2Fmaster%2Flabs%2F2%2520Stream%2520Analytics%2Fazuredeploy.json"><img src="http://azuredeploy.net/deploybutton.png"/></a>
