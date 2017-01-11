@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/DutchAzureMeetup/BigDataIngestion1.svg?branch=master)](https://travis-ci.org/DutchAzureMeetup/BigDataIngestion1)
+[![Build status](https://ci.appveyor.com/api/projects/status/ch4ph3xdg4i44a98/branch/master?svg=true)](https://ci.appveyor.com/project/olandese/bigdataingestion1/branch/master)
 
 # BigDataIngestion Part 1
 
