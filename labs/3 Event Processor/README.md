@@ -7,7 +7,7 @@
 
 To use the Event Hubs Processor Host we'll need some references to preview packages. Add the following dependencies to project.json:
 
-```
+```json
     "dependencies": {
         "Microsoft.Azure.EventHubs": "0.0.4-preview",
         "Microsoft.Azure.EventHubs.Processor": "0.0.4-preview"
@@ -19,7 +19,7 @@ The reason for this error is that the ```Microsoft.Azure.EventHubs``` packages a
 To get rid of this error, we must configure the .NET Core application to allow for .NET Portable dependencies.
 Update the imports element to include ```portable-net45+win8```:
 
-```
+```json
     "imports": [
         "dnxcore50",
         "portable-net45+win8"
@@ -36,7 +36,7 @@ The ```MyEventProcessor``` class will receive the messages from the Event Hub an
 ```ProcessErrorAsync``` is called when any exception has occured in the processor, and ```ProcessEventsAsync``` will be called with the actual batch of messages to process.
 Implement the ```OpenAsync```, ```CloseAsync``` and ```ProcessErrorAsync``` methods by simply logging the call and returning a completed ```Task```:
 
-```
+```C#
     public class MyEventProcessor : IEventProcessor
     {
         public Task OpenAsync(PartitionContext context)
@@ -65,7 +65,7 @@ After logging the messages call ```context.CheckpointAsync``` to let the process
 This ensures that the messages won't be processed again if the processor loses its lease to another processor.
 However, since the application may crash or be stopped after message processing but before the call to ```CheckpointAsync``` is completed the application must still be written to support at-least-once messaging. 
 
-```
+```C#
     ...
 
     public Task ProcessEventsAsync(PartitionContext context, IEnumerable<EventData> messages)
@@ -91,7 +91,7 @@ Before we can create an ```EventProcessorHost``` we'll need some connection stri
 - Now open Program.cs and add the following code to the ```Pogram``` class.
 Fill in the placeholders with the values from the previous step.
 
-```
+```C#
     private static async Task MainAsync()
     {
         var eventProcessorHost = new EventProcessorHost(
@@ -115,7 +115,7 @@ Fill in the placeholders with the values from the previous step.
 
 - Modify the original ```Main``` method to call the new ```MainAsync``` method:
 
-```
+```C#
     public static void Main(string[] args)
     {
         MainAsync().GetAwaiter().GetResult();
@@ -135,7 +135,7 @@ To illustrate how this can be done, we'll first add a dependency to the ```MyEve
 
 - Create a new ```IMessageLogger``` interface with a single method:
 
-```
+```C#
     public interface IMessageLogger
     {
         void LogMessages(IEnumerable<EventData> messages);
@@ -145,7 +145,7 @@ To illustrate how this can be done, we'll first add a dependency to the ```MyEve
 - Create a new ```ConsoleMessageLogger``` class that implements the interface.
 We will inject an instance of this class into the ```MyEventProcessor``` to log the messages.
 
-```
+```C#
     public class ConsoleMessageLogger : IMessageLogger
     {
         public void LogMessages(IEnumerable<EventData> messages)
@@ -157,7 +157,7 @@ We will inject an instance of this class into the ```MyEventProcessor``` to log 
 
 - Add a constructor to the ```MyEventProcessor``` class that takes an instance of ```IMessageLogger``` and stores it in a private field:
 
-```
+```C#
     private readonly IMessageLogger _messageLogger;
 
     public MyEventProcessor(IMessageLogger messageLogger)
@@ -168,7 +168,7 @@ We will inject an instance of this class into the ```MyEventProcessor``` to log 
 
 - Modify the ```ProcessEventsAsync``` method to use the injected ```IMessageLogger``` instead of directly writing to the console:
 
-```
+```C#
     public Task ProcessEventsAsync(PartitionContext context, IEnumerable<EventData> messages)
     {
         _messageLogger.LogMessages(messages);
@@ -180,7 +180,7 @@ We will inject an instance of this class into the ```MyEventProcessor``` to log 
 - Now that the ```MyEventProcessor``` requires a constructor argument we'll need a different way to register it with the host.
 For this, we'll need a separate factory class that implements ```IEventProcessorFactory``` and can create instances of ```MyEventProcessor```:
 
-```
+```C#
     public class MyEventProcessorFactory : IEventProcessorFactory
     {
         private readonly IMessageLogger _messageLogger;
@@ -201,7 +201,7 @@ For this, we'll need a separate factory class that implements ```IEventProcessor
 
 - Modify the ```MainAsync``` method in Program.cs to register the factory instead of directly registering the processor:
 
-```
+```C#
     IMessageLogger messageLogger = new ConsoleMessageLogger();
     IEventProcessorFactory processorFactory = new MyEventProcessorFactory(messageLogger);
 
