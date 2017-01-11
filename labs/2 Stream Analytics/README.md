@@ -181,12 +181,12 @@ You can download the files craeted:
 
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/23.png?raw=true)
 
-Now open the file with your favorite Text Editor, you will see the data formatted as specied in the Blob Output of the Stream Analytics job.
+Now open the file with your favorite Text Editor, you will see the data formatted as specified in the Blob Output of the Stream Analytics job.
 
-There will be three extra properties added:
+There will be three extra properties added to the events which are not coming from the WebJob generator:
 
 * EventProcessedUtcTime
 * PartitionId
 * EventEnqueuedUtcTime
 
-This properties are added to the events in the Event Hub and they are in the files because we use a __SELECT *__ in the Stream Analytics Job's query. 
+This properties are added to the events by the Event Hub and they are in the files because we use a __SELECT *__ in the Stream Analytics Job's query. 
