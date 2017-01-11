@@ -156,7 +156,21 @@ The messages are crated in Stream Analytics (see the previous query).
 
 # Check the output sent to Blob Storage #
 
+## **Step 21**  ##
 Go back to the Resource Group: 
 
 ![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/21.jpg?raw=true)
 
+## **Step 22**  ##
+
+![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/2%20Stream%20Analytics/img/22.png?raw=true)
+
+In the folder thermostatdata a new foder will be created with this format:
+
+fdate=YYYY-MM-DD and in this folder a subfolder with will be created for every hour.
+
+Finally you will see two CSV files.
+
+Why two?   
+The Event Hub where Stream Analytics is getting the event from has two partitions. 
+The **PARTITION BY PartitionId** in the first query in the Stream Analytics job is writing a file for each Event Hub partition.
