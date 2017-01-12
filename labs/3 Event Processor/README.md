@@ -1,9 +1,30 @@
 
 # Azure Event Hub Processor for .NET Core
 
+## Prerequisites 
+
+Download the .NET Core 1.0.3 SDK for your environment from https://www.microsoft.com/net/download/core:
+
+![](https://github.com/DutchAzureMeetup/BigDataIngestion1/blob/master/labs/3%20Event%20Processor/img/downloaddotnetcore.png?raw=true)
+
+## Let's start
+
 - Open the command prompt (or terminal) and create a new folder for the C# project.
 
-- Navigate to the folder and type ```dotnet new``` to generate a sample program.
+- Navigate to the folder
+
+- Add a file called global.json with the following content and save the file:
+
+```json
+{
+    "sdk": {
+        "version": "1.0.0-preview2-003156"
+    }
+}
+
+``` 
+
+- Type ```dotnet new``` to generate a sample program.
 
 To use the Event Hubs Processor Host we'll need some references to preview packages. Add the following dependencies to project.json:
 
