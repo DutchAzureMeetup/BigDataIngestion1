@@ -1,6 +1,14 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/ch4ph3xdg4i44a98/branch/master?svg=true)](https://ci.appveyor.com/project/olandese/bigdataingestion1/branch/master)
 
-# BigDataIngestion Part 1
+# Big Data Ingestion Part 1
+
+This is the repo for Part 1 of the Big Data Ingestion for the Dutch Azure Meetup (https://www.meetup.com/Dutch-Azure-Meetup/events/235680190/)
+
+Slides are in the "slides" folder. 
+
+Follow the three labs in the "labs" folder.
+
+Eventually if you just want to see what will be created during the labs, follow this steps: 
 
 ## Option 1: Deploy directly from the portal
 
