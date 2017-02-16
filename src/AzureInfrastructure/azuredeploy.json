@@ -44,7 +44,7 @@
         "mode": "Incremental",
         "templateLink": {
           //Dit must be a public url (in Linked template local file system is not supported)
-          "uri": "https://raw.githubusercontent.com/DutchAzureMeetup/BigDataIngestion1/master/src/AzureInfrastructure/Microsoft.Eventhub/azuredeploy.json",
+          "uri": "[concat(variables('repoUrl'), '/', variables('branch') , '/src/AzureInfrastructure/Microsoft.Eventhub/azuredeploy.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -65,7 +65,7 @@
         "mode": "Incremental",
         "templateLink": {
           //Dit must be a public url (in Linked template local file system is not supported)
-          "uri": "https://raw.githubusercontent.com/DutchAzureMeetup/BigDataIngestion1/master/src/AzureInfrastructure/Microsoft.Storage/azuredeploy.json",
+          "uri": "[concat(variables('repoUrl'), '/', variables('branch') , '/src/AzureInfrastructure/Microsoft.Storage/azuredeploy.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -83,7 +83,7 @@
         "mode": "Incremental",
         "templateLink": {
           //Dit must be a public url (in Linked template local file system is not supported)
-          "uri": "https://raw.githubusercontent.com/DutchAzureMeetup/BigDataIngestion1/master/src/AzureInfrastructure/Microsoft.ServiceBus/azuredeploy.json",
+          "uri": "[concat(variables('repoUrl'), '/', variables('branch') , '/src/AzureInfrastructure/Microsoft.ServiceBUs/azuredeploy.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -101,7 +101,7 @@
         "mode": "Incremental",
         "templateLink": {
           //Dit must be a public url (in Linked template local file system is not supported)
-          "uri": "https://raw.githubusercontent.com/DutchAzureMeetup/BigDataIngestion1/master/src/AzureInfrastructure/Microsoft.StreamAnalytics/azuredeploy.json",
+          "uri": "[concat(variables('repoUrl'), '/', variables('branch') , '/src/AzureInfrastructure/Microsoft.StreamAnalytics/azuredeploy.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -142,7 +142,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "https://raw.githubusercontent.com/DutchAzureMeetup/BigDataIngestion1/master/src/AzureInfrastructure/Microsoft.Web/azuredeploy-plan.json",
+          "uri": "[concat(variables('repoUrl'), '/', variables('branch') , '/src/AzureInfrastructure/Microsoft.Web/azuredeploy.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -160,7 +160,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "https://raw.githubusercontent.com/DutchAzureMeetup/BigDataIngestion1/master/src/AzureInfrastructure/Microsoft.Web/azuredeploy-webapp.json",
+          "uri": "[concat(variables('repoUrl'), '/', variables('branch') , '/src/AzureInfrastructure/Microsoft.Web/azuredeploy.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
