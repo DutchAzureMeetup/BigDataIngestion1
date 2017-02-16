@@ -33,7 +33,7 @@
       "environment": "[parameters('environment')]"
     },
     "repoUrl": "https://github.com/DutchAzureMeetup/BigDataIngestion1.git",
-    "branch": "master"
+    "branch": "marco"
   },
   "resources": [
     {
