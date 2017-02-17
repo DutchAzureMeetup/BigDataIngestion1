@@ -49,6 +49,14 @@
       "metadata": {
         "description": "Number of days for retention"
       }
+    },
+    "storageAccountNameArchive":
+    {
+      "type": "string",
+      "metadata": {
+        "description": "The Storage Account Name to save the Event Hub events (archive)"
+      }
+
     }
   },
   "variables": {
@@ -87,7 +95,20 @@
           "properties": {
             "path": "[parameters('eventHubName')]",
             "partitionCount": "[parameters('partitionCount')]",
-            "messageRetentionInDays": "[parameters('messageRetentionInDays')]"
+            "messageRetentionInDays": "[parameters('messageRetentionInDays')]",
+            "ArchiveDescription": {
+              "enabled": "true",
+              "encoding": "Avro",
+              "intervalInSeconds": "300",
+              "sizeLimitInBytes": 314572800,
+              "destination": {
+                "name": "EventHubArchive.AzureBlockBlob",
+                "properties": {
+                  "StorageAccountResourceId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountNameArchive'))]",
+                  "BlobContainer": "[concat(parameters('configuration').projectName, '-archive')]"
+                }
+              }
+            }
           },
           "resources": [
             {
