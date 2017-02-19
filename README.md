@@ -8,7 +8,7 @@ Slides are in the "slides" folder.
 
 Follow the three labs in the "labs" folder.
 
-Eventually if you just want to see what will be created during the labs, follow this steps: 
+Or if you just want everything created at once, follow this steps: 
 
 ## Option 1: Deploy directly from the portal
 
@@ -16,8 +16,11 @@ Eventually if you just want to see what will be created during the labs, follow 
 
     <a target="_blank" id="deploy-to-azure"  href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDutchAzureMeetup%2FBigDataIngestion1%2Fmaster%2Fsrc%2FAzureInfrastructure%2Fazuredeploy.json"><img src="http://azuredeploy.net/deploybutton.png"/></a>
 
-2. Fill the required settings
-3. Start the Stream Analytics Job
+2. Fill the required settings:
+
+    ![](https://raw.githubusercontent.com/DutchAzureMeetup/BigDataIngestion1/master/img/intro.png)
+
+3. After the deployment has finished start the Stream Analytics Job
 
 ## Option 2: Deploy Azure Resources from PowerShell 
 
@@ -34,4 +37,4 @@ Please follow this steps to get everything working:
   6.2 Select the subscription which you want to use: **Select-AzureRmSubscription -SubscriptionId** {put here your subscriptionid}
   
 7. Deploy: **.\deploy.ps1**
-8. Start the Stream Analytics Job
+8. After the deployment has finished start the Stream Analytics Job
