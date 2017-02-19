@@ -28,7 +28,7 @@ Please follow this steps to get everything working:
 
 1. Clone this repo: https://github.com/DutchAzureMeetup/BigDataIngestion1.git
 2. In your favorite text editor open this file: \src\AzureInfrastructure\azuredeploy.parameters.json
-3. Change the value of the "projectName" to something else and save the file (projectName must be between 3 and 20 characters in length and use numbers and lower-case letters only).
+3. Change the value of the "projectName" to something unique, like: your name + surname + a random number, and save the file (projectName must be between 3 and 20 characters in length and use numbers and lower-case letters only).
 4. In a powershell prompt navigate to this directory: \src\AzureInfrastructure
 5. Login in azure with your credentials: **Login-AzureRmAccount**
 6. **[Optional]** Follow this only if you have multiple Azure subscriptions:
